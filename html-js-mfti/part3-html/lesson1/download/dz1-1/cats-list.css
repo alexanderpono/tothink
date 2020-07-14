@@ -1,0 +1,32 @@
+.list .image {
+    width: 30%;
+    min-width: 350px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: bottom;
+    float:left;
+}
+
+.list .image img {
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.list .commonInfo {
+    float: left;
+    width: 30%;
+    min-width: 300px;
+    padding: 0px 20px;
+}
+
+.list .descr {
+    float: left;
+    width: 30%;
+    padding: 0px 20px;
+}
+.list .card {
+    clear: both;
+    min-width: 1200px;
+    padding: 20px 0px 0px;
+}
+

@@ -1,0 +1,108 @@
+body {
+    font-size: 16px;
+    font-family: Times, serif;
+}
+
+.header__title {
+    font: 550%/1.0 Cloister Black, Times, serif;
+    text-align: center;
+}
+
+.header__weather-title {
+    font: bold 117% Hind Siliguri, sans-serif;
+    text-align: center;
+}
+
+.header__weather-text {
+    text-align: justify;
+    font-size: 80%;
+    line-height: 1.1;
+}
+
+.article__title {
+    font: bold 320%/1.0 Six Caps, sans-serif;
+    white-space: pre-line;
+}
+
+.article__subtitle {
+    text-align: center;
+    font-weight: bold;
+    font-size: 117%;
+}
+
+.article__author {
+    text-align: center;
+    font-weight: bold;
+    font-size: 80%;
+}
+
+.article__content > p {
+    text-indent: 2em;
+    font-size: 80%;
+    text-align: justify;
+    margin: 0px;
+}
+
+.article__title.article__title_font_racing {
+    font: 200%/1.0 Racing Sans One, sans-serif;
+    white-space: normal;
+}
+
+.article__title.article__title_font_farsan {
+    font: 230%/1.0 Farsan, sans-serif;
+}
+
+.article__add-text {
+    text-indent: 2em;
+    font-style: italic;
+    text-align: justify;
+    font-size: 80%;
+}
+
+.header__info {
+    text-align: center;
+}
+
+.multicolumn .article__content {
+    column-count: 2;
+    column-gap: 15px;
+}
+
+.multicolumn .article__continue {
+    column-span: all;
+}
+
+.multicolumn .article__author {
+    column-span: all;
+}
+
+
+.article__continue {
+    font-style: italic;
+    font-size: 80%;
+    text-align: center;
+}
+
+.article__image-caption {
+    text-decoration: underline;
+    font-size: 0.8rem;
+}
+
+.main-photo__caption {
+    text-align: right;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+
+.main-photo__title {
+    font-weight: bold;
+    font-size: 120%;
+}
+
+.sub-header__copyright {
+    font-size: 60%;
+}
+
+.main-photo__desc {
+    font-size: 80%;
+}

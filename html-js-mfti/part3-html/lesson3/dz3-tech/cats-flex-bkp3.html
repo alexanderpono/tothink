@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Бабуленькины (=^ ◡ ^=)</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #EBEBEB;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+        .content {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+
+        footer > article {
+            flex-shrink: 0;
+            border-top: 1px solid #7C7C7C;
+            height: 54px;
+        }
+
+        footer .copy {
+            display: inline-block;
+            width: 49%;
+            /*height: 54px;*/
+            /*border: 1px solid red;*/
+            /*vertical-align: middle;*/
+        }
+
+        footer .copy > p {
+            /*line-height: 54px;*/
+            margin-left: 47px;
+            font-size: 120%;
+        }
+
+        footer .address {
+            display: inline-block;
+            width: 49%;
+            text-align: right;
+            color: #1634A3;
+            font-size: 120%;
+        }
+
+        header {
+            /*border: 1px solid red;*/
+            height: 170px;
+        }
+
+        header > h1 {
+            text-align: center;
+            /*border: 1px solid red;*/
+            margin: 0;
+            line-height: 170px;
+            font-size: 270%;
+        }
+
+        main {
+            display: flex;
+            /*align-content: center;*/
+            min-width: 800px;
+        }
+        main > section {
+            /*border: 1px solid red;*/
+        }
+        main > .images {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        main > .images img {
+            width: 100%;
+            height: 100%;
+        }
+
+        main > .images > a {
+            background: #fff;
+            height: 288px;
+        }
+
+        @media screen and (max-width: 800px) {
+            main > .images > a {
+                height: 200px;
+            }
+        }
+
+        @media screen and (min-width: 801px) and (max-width: 1000px) {
+            main > .images > a {
+                height: 288px;
+            }
+        }
+
+        @media screen and (min-width: 1001px) and (max-width: 1200px) {
+            main > .images > a {
+                height: 350px;
+            }
+        }
+
+        @media screen and (min-width: 1201px) {
+            main > .images > a {
+                height: 450px;
+            }
+        }
+
+        main > .images a:nth-of-type(8n+1),
+        main > .images a:nth-of-type(8n+3),
+        main > .images a:nth-of-type(8n+4),
+        main > .images a:nth-of-type(8n+5),
+        main > .images a:nth-of-type(8n+7)
+        {
+            width:32%;
+        }
+        main > .images a:nth-of-type(8n+2),
+        main > .images a:nth-of-type(8n+6)
+        {
+            width:66%;
+        }
+
+        main > .images a:nth-of-type(8n+8)
+        {
+            width:100%;
+        }
+
+        main > .images a:nth-of-type(8n+2),
+        main > .images a:nth-of-type(8n+4),
+        main > .images a:nth-of-type(8n+5),
+        main > .images a:nth-of-type(8n+7) {
+            margin-left: 2%;
+        }
+
+
+
+        main > .images a {
+            margin: 0px 0px 2% 0;
+            position: relative;
+        }
+
+        main > .images a:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .images > a:hover::after {
+            display: block;
+            position: absolute;
+            bottom: 28px;
+            left: 0;
+            width: 80%;
+            min-width: 160px;
+            max-width: 260px;
+            height: 68px;
+            background: #777;
+            color: #fff;
+            font-size: 150%;
+            line-height: 65px;
+            text-align: center;
+            opacity: 0.5;
+            content: attr(data-name);
+        }
+
+        main > section:last-of-type {
+            align-self: flex-start;
+        }
+
+        main > section {
+            margin-bottom: 1%;
+        }
+
+        section.categories, section.rating {
+            width: 19%;
+            background: #D9D9D9;
+
+        }
+
+        section.space {
+            width: 1%;
+        }
+
+        section.images {
+            width: 58%;
+        }
+        main > input[type="radio"] {
+            display: none;
+        }
+        .categories {
+            display: flex;
+            flex-direction: column;
+            min-width: 180px;
+        }
+        .categories > label {
+            display: block;
+            /*border: 1px solid red;*/
+            border-bottom: 1px solid #fff;
+            height: 75px;
+            line-height: 75px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 140%;
+        }
+        .categories > label::after {
+            content: '';
+            display: block;
+            border-bottom: 1px solid #8D8A8A;
+            height: 1px;
+
+        }
+        /*.categories > label:focus {*/
+        /*}*/
+        #category1:checked ~ .images img.c1 {
+            opacity: 0.5;
+        }
+        #category2:checked ~ .images img.c2 {
+            opacity: 0.5;
+        }
+        #category3:checked ~ .images img.c3 {
+            opacity: 0.5;
+        }
+        #category4:checked ~ .images img.c4 {
+            opacity: 0.5;
+        }
+
+        #category1:checked ~ .categories > label#category1-label,
+        #category2:checked ~ .categories > label#category2-label,
+        #category3:checked ~ .categories > label#category3-label,
+        #category4:checked ~ .categories > label#category4-label
+        {
+            background: #5A5A5A;
+            color: #fff;
+        }
+
+        section.rating {
+            min-width: 220px;
+        }
+
+        .rating h2 {
+            font-weight: normal;
+            font-size: 180%;
+            line-height: 36px;
+            /*border: 1px solid red;*/
+            margin: 0 0 0 12px;
+            color: #DB0606;
+        }
+
+        .rating > label {
+            margin: 10px 10px 0 0;
+            line-height: 15px;
+            position: relative;
+            top: -2px;
+            display: inline-block;
+            /*border: 1px solid red;*/
+            /*height: 30px;*/
+            width: 165px;
+            text-align: right;
+        }
+
+        .rating > input[type="checkbox"] {
+            margin: 0 0 0 0;
+            line-height: 15px;
+            position: relative;
+            top: 1px;
+            display: inline-block;
+            border: 1px solid red;
+            width: 20px;
+            text-align: right;
+        }
+
+
+        .rating-items ul {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            padding: 0 0 0 15px;
+            margin: 0;
+            width: 200px;
+            /*border: 1px solid blue;*/
+        }
+
+        .rating-items li {
+            /*border: 1px solid red;*/
+            height: 86px;
+        }
+
+        .rating-items li:last-of-type {
+            /*border: 1px solid red;*/
+            height: 96px;
+        }
+
+        .rating-items .color {
+            /*border: 1px solid red;*/
+            width: 150px;
+            display: inline-block;
+        }
+
+        .rating-items h3 {
+            font-weight: normal;
+            margin: 26px 0 0 0;
+            padding: 0;
+            line-height: 100%;
+            font-size: 140%;
+            /*border: 1px solid green;*/
+            position: relative;
+            left: -2px;
+        }
+
+        .rating-items li::after {
+            /*border: 1px solid red;*/
+            display: inline-block;
+            content: attr(data-rating);
+            width: 10px;
+            /*text-align: right;*/
+            font-size: 150%;
+            font-weight: bold;
+            margin: 0 0 0 20px;
+        }
+
+        .rating-items .color span {
+            display: inline-block;
+            height: 20px;
+            /*position: relative;*/
+            /*left: -1px;*/
+            margin: 14px 0 0 0px;
+        }
+
+        .rating-items .color span::after {
+            display: inline-block;
+            height: 18px;
+            left: 1px;
+            top: 1px;
+            content: ' ';
+            position: relative;
+        }
+
+        .rating-items .color > .color-wrap {
+            /*border: 1px solid blue;*/
+        }
+
+        .rating-items li[data-rating='10'] .color span {
+            width: 150px;
+            background: linear-gradient(to right, #00B153, #C2C3C3);
+        }
+        .rating-items li[data-rating='10'] .color span:after {
+            width: 148px;
+            background: linear-gradient(to right, #07E971, #FFF);
+        }
+        .rating-items li[data-rating='9'] .color span {
+            width: 135px;
+            background: linear-gradient(to right, #00B153, #C2C3C3);
+        }
+        .rating-items li[data-rating='9'] .color span:after {
+            width: 133px;
+            background: linear-gradient(to right, #07E971, #FFF);
+        }
+        .rating-items li[data-rating='8'] .color span {
+            width: 120px;
+            background: linear-gradient(to right, #C3BC00, #C3C3C2);
+        }
+        .rating-items li[data-rating='8'] .color span::after {
+            width: 118px;
+            background: linear-gradient(to right, #FFF609, #FFF);
+        }
+
+        .rating-items li[data-rating='7'] .color span {
+            width: 105px;
+            background: #FFF609;
+        }
+        .rating-items li[data-rating='6'] .color span {
+            width: 90px;
+            background: #FFF609;
+        }
+        .rating-items li[data-rating='5'] .color span {
+            width: 75px;
+            background: #FFF609;
+        }
+        .rating-items li[data-rating='4'] .color span {
+            width: 60px;
+            background: linear-gradient(to right, #BA0602, #C3C1C1);
+        }
+        .rating-items li[data-rating='4'] .color span::after {
+            width: 58px;
+            background: linear-gradient(to right, #E90F09, #FFF);
+        }
+        .rating-items li[data-rating='3'] .color span {
+            width: 45px;
+            background: #E90F09;
+        }
+        .rating-items li[data-rating='2'] .color span {
+            width: 30px;
+            background: #E90F09;
+        }
+        .rating-items li[data-rating='1'] .color span {
+            width: 15px;
+            background: #E90F09;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="10"] {
+            order: 0;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="9"] {
+            order: 1;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="8"] {
+            order: 2;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="7"] {
+            order: 3;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="6"] {
+            order: 4;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="5"] {
+            order: 5;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="4"] {
+            order: 6;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="3"] {
+            order: 7;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="2"] {
+            order: 8;
+        }
+
+        #rating-order:checked ~ .rating-items li[data-rating="1"] {
+            order: 9;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <header>
+           <h1>Бабуленькины котятки</h1>
+        </header>
+        <main>
+            <section class="space"></section>
+            <input class="radio" type="radio" id="category1" name="category" checked>
+            <input class="radio" type="radio" id="category2" name="category">
+            <input class="radio" type="radio" id="category3" name="category">
+            <input class="radio" type="radio" id="category4" name="category">
+            <section class="categories">
+                <label for="category1" id="category1-label">Абиссинская</label>
+                <label for="category2" id="category2-label">Британская</label>
+                <label for="category3" id="category3-label">Русская голубая</label>
+                <label for="category4" id="category4-label">Сиамская</label>
+            </section>
+            <section class="space"></section>
+            <section class="images">
+                <a href="#" data-name="Гоша, 4 года"><img src="cat1.jpg" class="c1"></a>
+                <a href="#" data-name="Мурзик, 5 лет"><img src="cat2.jpg" class="c2"></a>
+                <a href="#" data-name="Гоша, 4 года"><img src="cat3.jpg" class="c2"></a>
+                <a href="#" data-name="Мурзик, 5 лет"><img src="cat4.jpg" class="c2"></a>
+                <a href="#" data-name="Гоша, 4 года"><img src="cat5.jpg" class="c3"></a>
+                <a href="#" data-name="Мурзик, 5 лет"><img src="cat6.jpg" class="c4"></a>
+                <a href="#" data-name="Гоша, 4 года"><img src="cat7.jpg" class="c3"></a>
+                <a href="#" data-name="Мурзик, 5 лет"><img src="cat8.jpg" class="c4"></a>
+
+                <a href="#" data-name="Гоша, 4 года"><img src="cat1.jpg" class="c1"></a>
+                <a href="#" data-name="Мурзик, 5 лет"><img src="cat2.jpg" class="c2"></a>
+                <a href="#" data-name="Гоша, 4 года"><img src="cat3.jpg" class="c2"></a>
+                <a href="#" data-name="Мурзик, 5 лет"><img src="cat4.jpg" class="c2"></a>
+                <a href="#" data-name="Гоша, 4 года"><img src="cat5.jpg"  class="c3"></a>
+                <a href="#" data-name="Мурзик, 5 лет"><img src="cat6.jpg" class="c4"></a>
+                <a href="#" data-name="Гоша, 4 года"><img src="cat7.jpg" class="c3"></a>
+                <a href="#" data-name="Мурзик, 5 лет"><img src="cat8.jpg" class="c4"></a>
+            </section>
+            <section class="space"></section>
+            <section class="rating">
+                <h2>РЕЙТИНГ</h2>
+                <label for="rating-order">по убыванию</label>
+                <input type="checkbox" id="rating-order">
+
+                <div class="rating-items">
+                    <ul>
+                        <li data-rating="9">
+                            <h3>Абиссинская</h3>
+                            <div class="color"><span></span></div>
+                        </li>
+                        <li data-rating="8">
+                            <h3>Британская</h3>
+                            <div class="color"><span></span></div>
+                        </li>
+                        <li data-rating="10">
+                            <h3>Русская голубая</h3>
+                            <div class="color"><span></span></div>
+                        </li>
+                        <li data-rating="4">
+                            <h3>Сиамская</h3>
+                            <div class="color"><span></span></div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="space"></div>
+    <footer>
+        <article>
+            <div class="copy"><p>&copy; ООО Бабуленькины котятки, 2015-2019</p></div>
+            <div class="address">Наш адрес: <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="streetAddress">ул. Котовая, д.5</span></span></div>
+        </article>
+    </footer>
+</body>
+</html>

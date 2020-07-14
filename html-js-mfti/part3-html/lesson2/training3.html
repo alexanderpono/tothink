@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>training3</title>
+</head>
+<style>
+    span {
+        width: 100px;
+        height: 100px;
+        /*border: 1px solid red;*/
+        display: block;
+    }
+    .red, .green, .blue {
+        position: absolute;
+    }
+    .red {
+        background: red;
+        z-index: 1;
+        top: 0px;
+        left: 0px;
+    }
+    .green {
+        background: green;
+        top: 50px;
+        left: 50px;
+    }
+    .blue {
+        background: blue;
+        top: 90px;
+        left: 90px;
+    }
+
+    .wrapper div:nth-of-type(1) {
+        opacity: .5;
+    }
+
+</style>
+<body>
+<a href="https://habr.com/ru/post/166435/">https://habr.com/ru/post/166435/</a>
+
+<div class="wrapper">
+    <div>
+        <span class="red">Red</span>
+    </div>
+    <div>
+        <span class="green">Green</span>
+    </div>
+    <div>
+        <span class="blue">Blue</span>
+    </div>
+</div>
+
+</body>
+</html>
