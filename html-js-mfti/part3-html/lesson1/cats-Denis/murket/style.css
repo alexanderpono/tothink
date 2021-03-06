@@ -1,0 +1,115 @@
+.cat {
+	display: inline-block;
+	width: 300px;
+	margin: 20px 20px 60px;
+}
+
+.list:checked + .wrapper > .cat {
+	width: 100%;
+}
+
+.list:checked + .wrapper > .cat > div {
+	display: inline-block;
+	margin: 0;
+	vertical-align: top;
+	width: 30%;
+}
+
+.cat:hover .image_wrap > img {
+	opacity: 0.7;
+}
+
+.image_wrap > img {
+	display: inline-block;
+	width: 250px;
+}
+
+.name {
+	font-size:20px;
+    display: block;
+    overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
+.name:hover {
+	color:red;
+}
+
+.category > a {
+	color: gray;
+}
+
+.category > a:hover {
+	color: red;
+}
+
+.price {
+	font-size:20px;
+	font-weight: bold;
+	color:#c61700;
+}
+
+.old_price {
+	font-size: 16px;
+	font-weight: normal;
+	color: gray;
+	text-decoration: line-through;
+}
+
+.description {
+	margin-top:20px; 
+}
+
+.rating {
+    direction: rtl;
+    
+	margin-top: 5px;
+    margin-left: -3px;
+    display: inline-block;
+}
+
+.rating .half-star {
+	width: 12px;
+	height: 24px;
+	margin-right: -4px;
+	display: inline-block;
+}
+
+
+.first {
+	background:url("spices_of_stars/1half_empty.png");
+}
+
+.second {
+	background:url("spices_of_stars/2half_empty.png");
+}
+
+
+.first:hover,
+.half-star:hover ~ .first
+{
+	background:url("spices_of_stars/1half.png");
+}
+
+.second:hover,
+.half-star:hover ~ .second
+{
+	background:url("spices_of_stars/2half.png");
+}
+
+.radio {
+    display: none;
+}
+
+.radio:checked ~ .first {
+    background:url("spices_of_stars/1half.png");
+}
+
+.radio:checked ~ .second {
+    background:url("spices_of_stars/2half.png");
+}
+
+
+
+

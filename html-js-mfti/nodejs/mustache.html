@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+//переменные в Mustache
+
+<script type="text/javascript" src="mustache.js"></script>
+
+<script>
+    var template = '<a href="{{ref}}" title="{{title}}">{{linkText}}</a>';
+    var data = {
+        ref: 'http://yandex.ru',
+        title: 'yandex',
+        linkText: 'yandex site'
+    }
+    document.write(Mustache.to_html(template, data));
+</script>
+
+
+//секции в Mustache
+
+//секция в Mustache - массив из простых значений
+{{#authorNames}}
+    <li>{{.}}</li>
+{{/authorNames}}
+<script>
+    var data = {
+        authorNames : ['Пушкин', 'Толстой', 'Тургенев']
+    }
+</script>
+<li>Пушкин</li>
+<li>Толстой</li>
+<li>Тургенев</li>
+
+//секция в Mustache - массив из объектов
+{{#authors}}
+<li>{{name}} - {{book}}</li>
+{{/authors}}
+<script>
+    var data = {
+        authors : [
+            {name: 'Пушкин', book:'Евгений Онегин'},
+            {name: 'Толстой', book:'Война и мир'},
+            {name: 'Тургенев', book:'Муму'}
+        ]
+    }
+</script>
+<li>Пушкин - Евгений Онегин</li>
+<li>Толстой - Война и мир</li>
+<li>Тургенев - Муму</li>
+
+
+
+//секция в Mustache - пустой массив из объектов - значение по умолчанию
+{{#authors}}
+<li>{{name}} - {{book}}</li>
+{{/authors}}
+{{^authors}}
+<li>авторов и книг нет</li>
+{{/authors}}
+<script>
+    var data = {
+        authors : [
+        ]
+    }
+</script>
+<li>авторов и книг нет</li>
+
+
+//секция в Mustache - оператор IF
+{{#clever}}
+<li>умный!</li>
+{{/clever}}
+<script>
+    var data = {
+        clever : true
+    }
+</script>
+<li>умный!</li>
+
+
+//секция в Mustache - вызов функции
+{{#func}}
+<li>умный {{name}}!</li>
+{{/func}}
+<script>
+    var data = {
+        name : 'Alex',
+        func: function(text) {
+            return '<b>' + text + '</b>';
+        }
+    }
+</script>
+<li>умный <b>Alex</b>!</li>
+
+
+//секция в Mustache - вызов внешнего шаблона
+{{#authors}}
+    {{> template2}}
+{{/authors}}
+
+
+//секция в Mustache - комментарий
+<h1>
+    text1 {{! comment}} text2
+</h1>
+<h1>
+    text1 text2
+</h1>
+
+
+
+</body>
+</html>

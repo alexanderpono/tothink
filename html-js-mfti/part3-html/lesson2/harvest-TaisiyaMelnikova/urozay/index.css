@@ -1,0 +1,188 @@
+body
+{
+	margin: 50px 10px;
+}
+
+input
+{
+	position: fixed;
+	top: 90%;
+	transform: scale(2);
+	z-index: 10;
+}
+
+.inp1
+{
+	left: 40%;
+}
+
+.inp2
+{
+	left: 45%;
+}
+
+.inp3
+{
+	left: 50%;
+}
+
+.inp4
+{
+	left: 55%;
+}
+
+.inp5
+{
+	left: 60%;
+}
+
+article
+{
+	display: none;
+	width: 24.4%;
+	height: 350px;
+	
+	position: relative;
+	top: 0;
+	
+	animation: moveAway 1s;
+}
+
+.but_open
+{
+	display: block;
+	position: relative;
+	width: 100%;
+	
+	cursor: pointer;
+}
+
+img:not(.image)
+{
+	position: relative;
+	left: 10%;
+	width: 80%;
+}
+
+.description
+{
+	width: 90%;
+	display: none;
+	
+	text-align: justify;
+	padding: 5%;
+}
+
+.wrapper
+{
+	width: 100%;
+	display: block;
+	transform: translate(0, 50%);
+}
+
+input:checked + article,
+input:checked + article + article,
+input:checked + article + article + article,
+input:checked + article + article + article + input + article
+{	
+	display: inline-block;
+	animation: moveLeft 1s;
+	cursor: pointer;
+}
+
+article:hover .wrapper .description
+{
+	display: block;
+	float: left;
+}
+
+article:hover .wrapper
+{	
+	width: 100%;
+	display: block;
+	
+	box-shadow: 0 0px 4px 8px #fff, 0 0px 4px 9px #000;
+	cursor: pointer;
+}
+
+/*--------------------------------------*/
+
+.open_modal, .close_modal
+{
+	display: none;
+}
+
+.but_close
+{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.modal
+{
+	display: none;
+	z-index: 15;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.but_close
+{
+	z-index: 20;
+	position: fixed;
+	width: 30px;
+	height: 30px;
+	top: 10px;
+	right: 10px;
+	
+	font: 30px Arial, sans-serif;
+	color: #FFF;
+}
+
+.but_close:hover
+{
+	transform: translate(3px, -3px);
+	text-shadow: #000 -2px 2px;
+}
+
+.modal .image
+{
+	display: block;
+	max-width: 70%;
+	max-height: 70%;
+	margin: 5% auto;
+}
+
+.open_modal:checked + input + .modal
+{
+	display: block;
+}
+
+@keyFrames moveLeft
+{
+	0%{
+		transform: translate(450%, 0);
+		right: -100%;
+	}
+	100%{
+		transform: translate(0, 0);
+		right: 0;
+	}
+}
+
+@keyFrames moveAway
+{
+	0%{
+		transform: translate(0, 0);
+		left: 0;
+	}
+	100%{
+		transform: translate(-450%, 0);
+		left: -100%;
+	}
+}

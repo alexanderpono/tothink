@@ -1,0 +1,245 @@
+/*шрифты*/
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
+@import url("https://fonts.googleapis.com/css?family=Underdog");
+@font-face {
+    font-family: FontAwesome;
+    font-weight: 900;
+    src: url(fonts/fa-solid-900.woff);
+}
+@font-face {
+    font-family: FontAwesome;
+    font-weight: 400;
+    src: url(fonts/fa-regular-400.woff);
+}
+
+/*шапка*/
+h1, h2 {
+    text-align: center;
+    font-family: Underdog, fantasy;
+}
+
+h1::first-letter, h3::first-letter {
+    color: red;
+}
+
+input[name="view-mode"] {
+    display: none;
+}
+
+label[for="view-mode-tile"], label[for="view-mode-list"] {
+    position: relative;
+    left: 10px;
+    font-family: FontAwesome;
+    font-weight: 900;
+    font-size: 2em;
+    display: inline-block;
+    color: #d4d4d4;
+    cursor: pointer;
+    margin: 10px;
+}
+
+label[for="view-mode-tile"]:hover, 
+label[for="view-mode-list"]:hover,
+input[value="tile"]:checked ~ label[for="view-mode-tile"],
+input[value="list"]:checked ~ label[for="view-mode-list"] {
+    color: black;
+}
+
+label[for="view-mode-tile"]:before {
+    content: "\f009";
+}
+
+label[for="view-mode-list"]:before {
+    content: "\f00b";
+}
+
+
+/*основные*/
+body {
+    margin: 0;
+    font-family: TimesNewRoman, sans-serif;
+}
+
+h3 {
+    margin: 10px 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+h3 a {
+    font-size: 1.3em;
+}
+
+.cat__category a {
+    color: black; 
+}
+
+
+/*таблица*/
+.cats {
+    padding-left: 50px;
+}
+
+.cat {
+    display: inline-block;
+    width: 300px;
+    padding: 20px;
+    vertical-align: top;
+/*  border-radius: 5px;
+    border: 2px solid;*/
+}
+
+
+/*фото кота*/
+.cat:hover .cat__image {
+    opacity: 0.7;
+}
+
+.cat__image {
+    display: table-cell;
+    height: 350px;
+    width: 350px;
+    vertical-align: bottom;
+    text-align: left;
+}
+
+.cat__image img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+}
+
+
+/*имя кота*/
+.cat__name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+a.red__hover:hover {
+    color: red;
+}
+
+.cat__category {
+    margin: 5px 0 8px;
+}
+
+
+/*цена*/
+.cat-price {
+    margin-top: 8px;
+}
+
+.cat-price-new {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #96070a;
+}
+
+.cat-price-old {
+    font-size: 1.1rem;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+
+/*описание*/
+.cat__description p {
+    margin: 0;
+}
+
+.cat__description-title {
+    font-weight: bold;
+    margin: 15px 0 5px;
+}
+
+
+/*рейтинг*/
+fieldset {
+    margin: 0; padding: 0;
+}
+
+.rating {
+    border: none;
+    display: inline-block;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating > label:before {
+    margin: 4px;
+    font-size: 1.2em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating > .half:before {
+    content: "\f089";
+    position: absolute;
+}
+
+.rating > label {
+    float: right;
+    cursor: pointer;
+    color: orange;
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    font-weight: 900;
+    color: orange;
+}
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+    font-weight: 900;
+    color: orange;
+}
+
+
+/*cписок*/
+#view-mode-list:checked ~ .cat {
+    display: block;
+    width: 97%;
+    margin-bottom: 10px;
+}
+
+#view-mode-list:checked ~ .cat .cat__info {
+    max-width: 400px;
+}
+
+#view-mode-list:checked ~ .cat .cat__image, #view-mode-list:checked ~ .cat .cat__info, #view-mode-list:checked ~ .cat .cat__description {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#view-mode-list:checked ~ .cat .cat__image {
+    width: 25%;
+    height: auto;
+    width: 262.5px;
+}
+
+#view-mode-list:checked ~ .cat .cat__image img {
+    width: 100%;
+    height: auto;
+}
+
+#view-mode-list:checked ~ .cat .cat__info {
+    width: 28%;
+    margin-left: 20px;
+}
+
+#view-mode-list:checked ~ .cat .cat__description {
+    width: 33%;
+    margin-top: 5px;
+}
+

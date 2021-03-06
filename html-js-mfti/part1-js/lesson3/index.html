@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lesson3</title>
+</head>
+<body>
+open JS console F12
+
+<script>
+var tweet = {
+    text: 'tttstst #tag1 и в принципе #tag2 dddd #тэг3 ppp'
+};
+
+Object.defineProperty(tweet, 'linkify', {
+    get: function() {
+        return this.text.replace(
+            /(#([a-z0-9а-я]+))/gi,
+            '<a href="$2">$1</a>'
+        );
+    }
+})
+
+console.log(Object.getOwnPropertyDescriptor(tweet, 'linkify'));
+
+console.log('tweet.linkify', tweet.linkify);
+
+var q1 = ({ a: 1 } == { a: 1 });
+console.log('q1', q1);
+
+console.log('1 === \'1\'', 1 === '1');
+
+var text = 'мороз и солнце'.replace(/[а-я]+/, 'снег');
+console.log('text', text);
+
+
+</script>
+</body>
+</html>
