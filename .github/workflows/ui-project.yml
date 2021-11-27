@@ -101,4 +101,5 @@ jobs:
             ${{ (steps.Deploy-app.outcome == 'failure' &&  'Deploy-app ⛔ ') || '' }}
             ${{ (steps.Deploy-storybook.outcome == 'failure' &&  'Deploy-storybook ⛔ ') || '' }}
             ${{ (steps.Deploy-test-report.outcome == 'failure' &&  'Deploy-test-report ⛔ ') || '' }}
+            отчет доступен по ссылке: http://alexanderpono.github.io/tothink/
         run: sh .tg-notify.sh
