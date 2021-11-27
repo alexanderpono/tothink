@@ -1,12 +1,12 @@
 #!/bin/bash
-var="hello"
-echo "$var world"
+# var="hello"
+# echo "$var world"
 # echo "TEST_VAL1=$TEST_VAL1"
-echo "TEST_VAL2=$TEST_VAL2"
+# echo "TEST_VAL2=$TEST_VAL2"
 echo "MSG=$MSG"
 
-TEXT="Тестирование выполнено: (☉_☉)"
-curl -s -X POST https://api.telegram.org/$TELEGRAM_BOT_TOKEN/sendMessage -d chat_id=$TELEGRAM_USER_ID  -d text="$TEXT"
+# TEXT="Тестирование выполнено: (☉_☉)"
+curl -s -X POST https://api.telegram.org/$TELEGRAM_BOT_TOKEN/sendMessage -d chat_id=$TELEGRAM_USER_ID  -d text="$MSG"
 
 # curl -F chat_id=$TELEGRAM_USER_ID -F document=@"./temp/testResult.html" https://api.telegram.org/$TELEGRAM_BOT_TOKEN/sendDocument
 
