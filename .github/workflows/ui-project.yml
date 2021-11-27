@@ -74,4 +74,15 @@ jobs:
       - name: Call local .sh
         id: Local-sh
         run: sh .tg-notify.sh
-        
+
+      - name: 'Send telegram notification'
+        if: ${{ always() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_USER_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ${{ (job.status == 'success' && '✅' ) || '⛔'}} repository: ${{ github.repository }}
+            wf: ${{github.workflow}}
+            event: ${{github.event.name}}
+            status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
