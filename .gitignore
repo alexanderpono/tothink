@@ -1,8 +1,0 @@
-node_modules
-package-lock.json
-.idea
-*.tmp
-html-js-mfti
-.vscode
-coverage
-build-storybook.log
