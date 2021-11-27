@@ -4,3 +4,5 @@ package-lock.json
 *.tmp
 html-js-mfti
 .vscode
+coverage
+build-storybook.log
