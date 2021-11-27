@@ -43,9 +43,15 @@ jobs:
         id: Run-tests
         run: npm run test
 
-      - name: run loki test
+      - name: Run loki test
         id: Loki-test
         run: npm run test:loki
+
+      - name: Run chromatic test
+        id: Chromatic-test
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: npx chromatic
 
       # - name: Build project
       #   id: Project-build
@@ -97,6 +103,7 @@ jobs:
       #       wf: ${{github.workflow}}
       #       event: ${{github.event.name}}
       #       status: ${{job.status}} ${{ (job.status == 'success' && '🚀 🦉 🚀' ) || '🔥🔥 ⛔ 🔥🔥'}}
+      #       отчет unit-tests доступен по ссылке: http://alexanderpono.github.io/tothink/
       #       ${{ (steps.Npm-install.outcome == 'failure' &&  'NPM ⛔ ') || '' }} 
       #       ${{ (steps.Linter.outcome == 'failure' &&  'ESLINT ⛔ ') || '' }} 
       #       ${{ (steps.Run-tests.outcome == 'failure' &&  'TESTS ⛔ ') || '' }} 
@@ -105,5 +112,4 @@ jobs:
       #       ${{ (steps.Deploy-app.outcome == 'failure' &&  'Deploy-app ⛔ ') || '' }}
       #       ${{ (steps.Deploy-storybook.outcome == 'failure' &&  'Deploy-storybook ⛔ ') || '' }}
       #       ${{ (steps.Deploy-test-report.outcome == 'failure' &&  'Deploy-test-report ⛔ ') || '' }}
-      #       отчет доступен по ссылке: http://alexanderpono.github.io/tothink/
       #   run: sh .tg-notify.sh
