@@ -76,6 +76,11 @@ jobs:
         env:
           TEST_VAL1: ${{ secrets.TEST_SECRET }}
           TEST_VAL2: Peter
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
+          MSG: |
+            u-u-u
+            wf: ${{github.workflow}}
         run: sh .tg-notify.sh
 
       # - name: 'Send telegram notification'
