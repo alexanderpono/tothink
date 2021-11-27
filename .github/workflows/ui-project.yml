@@ -73,7 +73,7 @@ jobs:
 
       - name: Call local .sh
         id: Local-sh
-        with:
+        env:
           TEST_VAL1: ${{ secrets.TEST_SECRET }}
           TEST_VAL2: Peter
         run: sh .tg-notify.sh
