@@ -71,8 +71,19 @@ jobs:
           TARGET_FOLDER: ui-project/storybook
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
+      - name: Deploy test-report to GHP /tothink/ui-project/test-report 🚀
+        id: Deploy-test-report
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: ui-project/temp # The folder the action should deploy.
+          TARGET_FOLDER: ui-project/test-report
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+
       - name: 'Send telegram notification'
         id: Local-sh
+        if: ${{ always() }}
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
@@ -89,4 +100,5 @@ jobs:
             ${{ (steps.Storybook-build.outcome == 'failure' &&  'Storybook-build ⛔ ') || '' }}
             ${{ (steps.Deploy-app.outcome == 'failure' &&  'Deploy-app ⛔ ') || '' }}
             ${{ (steps.Deploy-storybook.outcome == 'failure' &&  'Deploy-storybook ⛔ ') || '' }}
+            ${{ (steps.Deploy-test-report.outcome == 'failure' &&  'Deploy-test-report ⛔ ') || '' }}
         run: sh .tg-notify.sh
