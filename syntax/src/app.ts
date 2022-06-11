@@ -1,11 +1,16 @@
 import { defaultLexState, lex, lexReducer } from './lexReducer';
 
 let state = { ...defaultLexState };
+const text = `
+function a(b) {
+    return b;
+}
+`;
 const actions = [
     lex.spaces([' ']),
-    lex.limiters([';', '(', ')']),
+    lex.limiters([';', '(', ')', '{', '}']),
     lex.compile(),
-    lex.parseLine('function a(b);')
+    lex.parseText(text)
 ];
 
 actions.forEach((action) => {

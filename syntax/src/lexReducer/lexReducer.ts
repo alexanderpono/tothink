@@ -6,7 +6,8 @@ export enum LexEvent {
     IDS = 'LEX/IDS',
     SPACES = 'LEX/SPACES',
     PARSE_LINE = 'LEX/PARSE_LINE',
-    COMPILE = 'LEX/COMPILE'
+    COMPILE = 'LEX/COMPILE',
+    PARSE_TEXT = 'LEX/PARSE_TEXT'
 }
 export interface LimitersAction {
     type: LexEvent.LIMITERS;
@@ -31,6 +32,13 @@ export interface ParseLineAction {
     type: LexEvent.PARSE_LINE;
     payload: {
         line: string;
+    };
+}
+
+export interface ParseTextAction {
+    type: LexEvent.PARSE_TEXT;
+    payload: {
+        text: string;
     };
 }
 
@@ -59,6 +67,10 @@ export const lex = {
     compile: (): CompileAction => ({
         type: LexEvent.COMPILE,
         payload: {}
+    }),
+    parseText: (text: string): ParseTextAction => ({
+        type: LexEvent.PARSE_TEXT,
+        payload: { text }
     })
 };
 
@@ -101,13 +113,15 @@ export interface CanonicTextItem {
     tableIndex: number;
     lineNo: number;
     pos: number;
+    lexem: string;
 }
 
 export const defaultCanonicTextItem: CanonicTextItem = {
     tableId: Table.DEFAULT,
     tableIndex: -1,
     lineNo: -1,
-    pos: -1
+    pos: -1,
+    lexem: ''
 };
 
 export type CanonicText = CanonicTextItem[];
@@ -140,13 +154,29 @@ export const lexReducer = handleActions(
             event: LexEvent.IDS,
             tables: { ...state.tables, [Table.IDS]: action.payload.table }
         }),
-        [LexEvent.PARSE_LINE]: (state: LexState, action: ParseLineAction) =>
-            parseLine(state, action.payload.line),
+        [LexEvent.PARSE_LINE]: (state: LexState, action: ParseLineAction) => {
+            const stateUpdate = parseLine(state, action.payload.line, 0);
+            return {
+                ...state,
+                event: LexEvent.PARSE_LINE,
+                text: stateUpdate.text,
+                tables: state.tables
+            };
+        },
         [LexEvent.COMPILE]: (state: LexState, action: CompileAction) => ({
             ...state,
             event: LexEvent.COMPILE,
             compiled: compile(state)
-        })
+        }),
+        [LexEvent.PARSE_TEXT]: (state: LexState, action: ParseTextAction) => {
+            const stateUpdate = parseText(state, action.payload.text);
+            return {
+                ...state,
+                event: LexEvent.PARSE_TEXT,
+                text: stateUpdate.text,
+                tables: state.tables
+            };
+        }
     },
     defaultLexState
 );
@@ -173,12 +203,12 @@ const getIndex = (s: string, compiled: CompiledLine[]): IndexData => {
     return { pos: bestIndex, lexem: bestCompiledLine };
 };
 
-export const parseLine = (state: LexState, line: string): LexState => {
+export const parseLine = (state: LexState, line: string, lineNo: number): LexState => {
     let iter = 0;
     const MAX_ITER = 10;
     let buf = line;
     let currentPosInLine = 0;
-    const text: CanonicTextItem[] = [];
+    const text: CanonicTextItem[] = [...state.text];
     const idsTable = [...state.tables.i];
 
     const addIdToText = (newId: string) => {
@@ -187,8 +217,9 @@ export const parseLine = (state: LexState, line: string): LexState => {
             const newTextItem: CanonicTextItem = {
                 tableId: Table.IDS,
                 tableIndex: posInIds,
-                lineNo: 0,
-                pos: currentPosInLine
+                lineNo,
+                pos: currentPosInLine,
+                lexem: newId
             };
             text.push(newTextItem);
         } else {
@@ -196,8 +227,9 @@ export const parseLine = (state: LexState, line: string): LexState => {
             const newTextItem: CanonicTextItem = {
                 tableId: Table.IDS,
                 tableIndex: idsTable.length - 1,
-                lineNo: 0,
-                pos: currentPosInLine
+                lineNo,
+                pos: currentPosInLine,
+                lexem: newId
             };
             text.push(newTextItem);
         }
@@ -207,8 +239,9 @@ export const parseLine = (state: LexState, line: string): LexState => {
         const newTextItem: CanonicTextItem = {
             tableId: indexData.lexem.tableId,
             tableIndex: indexData.lexem.tableIndex,
-            lineNo: 0,
-            pos: currentPosInLine
+            lineNo,
+            pos: currentPosInLine,
+            lexem: indexData.lexem.lexem
         };
         text.push(newTextItem);
     };
@@ -233,7 +266,7 @@ export const parseLine = (state: LexState, line: string): LexState => {
     }
     const newTables =
         idsTable.length === state.tables.i.length ? state.tables : { ...state.tables, i: idsTable };
-    return { ...state, event: LexEvent.PARSE_LINE, text, tables: newTables };
+    return { ...state, text, tables: newTables };
 };
 
 export const compile = (state: LexState): CompiledLine[] => {
@@ -255,4 +288,18 @@ export const compile = (state: LexState): CompiledLine[] => {
         )
     ];
     return result;
+};
+
+export const parseText = (state: LexState, srcText: string): LexState => {
+    let lines = srcText.split('\n');
+    lines = lines.map((line: string, index: number) =>
+        index < lines.length - 1 ? line + '\n' : line
+    );
+    let newState = { ...state, tables: { ...state.tables, i: [...state.tables.i] } };
+
+    lines.forEach((line: string, currentLineNo: number) => {
+        newState = parseLine(newState, line, currentLineNo);
+    });
+
+    return newState;
 };

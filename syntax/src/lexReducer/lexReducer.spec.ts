@@ -15,43 +15,57 @@ describe('LexicAnalyzer', () => {
         tableId: Table.LIMITERS,
         tableIndex: 0,
         lineNo: 0,
-        pos: 0
+        pos: 0,
+        lexem: ';'
     };
     const txtFunc: CanonicTextItem = {
         tableId: Table.IDS,
         tableIndex: 0,
         lineNo: 0,
-        pos: 0
+        pos: 0,
+        lexem: 'function'
     };
     const txtA: CanonicTextItem = {
         tableId: Table.IDS,
         tableIndex: 1,
         lineNo: 0,
-        pos: 0
+        pos: 0,
+        lexem: 'a'
     };
     const txtB: CanonicTextItem = {
         tableId: Table.IDS,
         tableIndex: 2,
         lineNo: 0,
-        pos: 0
+        pos: 0,
+        lexem: 'b'
     };
     const txtBrO: CanonicTextItem = {
         tableId: Table.LIMITERS,
         tableIndex: 1,
         lineNo: 0,
-        pos: 0
+        pos: 0,
+        lexem: '('
     };
     const txtBrC: CanonicTextItem = {
         tableId: Table.LIMITERS,
         tableIndex: 2,
         lineNo: 0,
-        pos: 0
+        pos: 0,
+        lexem: ')'
     };
     const txtSpace: CanonicTextItem = {
         tableId: Table.SPACES,
         tableIndex: 0,
         lineNo: 0,
-        pos: 0
+        pos: 0,
+        lexem: ' '
+    };
+    const txtNewLine: CanonicTextItem = {
+        tableId: Table.SPACES,
+        tableIndex: 1,
+        lineNo: 0,
+        pos: 0,
+        lexem: '\n'
     };
     const text1: CanonicText = [txtSemi];
     const text2: CanonicText = [txtFunc, { ...txtSemi, pos: 8 }];
@@ -74,11 +88,15 @@ describe('LexicAnalyzer', () => {
         cmpSemi,
         cmpBracketO,
         cmpBracketC,
-        { tableId: Table.SPACES, tableIndex: 0, lexem: ' ' }
+        { tableId: Table.SPACES, tableIndex: 0, lexem: ' ' },
+        { tableId: Table.SPACES, tableIndex: 1, lexem: '\n' }
     ];
     const limiters = lex.limiters([';', '(', ')']);
-    const spaces = lex.spaces([' ']);
+    const spaces = lex.spaces([' ', '\n']);
     const compile = lex.compile();
+    const srcText6 = `function
+a`;
+    const text6: CanonicText = [txtFunc, { ...txtNewLine, pos: 8 }, { ...txtA, lineNo: 1, pos: 0 }];
 
     test.each`
         actions                                                            | testName                                          | event                  | stateSelector | value
@@ -93,6 +111,7 @@ describe('LexicAnalyzer', () => {
         ${[limiters, spaces, compile, lex.parseLine('function a(b);')]}    | ${'sets .text from PARSE_LINE action (function)'} | ${LexEvent.PARSE_LINE} | ${'text'}     | ${text3}
         ${[limiters, spaces, compile, lex.parseLine('function')]}          | ${'sets .text from PARSE_LINE action (function)'} | ${LexEvent.PARSE_LINE} | ${'text'}     | ${text4}
         ${[limiters, spaces, compile, lex.parseLine('function function')]} | ${'sets .text from PARSE_LINE action (function)'} | ${LexEvent.PARSE_LINE} | ${'text'}     | ${text5}
+        ${[limiters, spaces, compile, lex.parseText(srcText6)]}            | ${'sets .text from PARSE_TEXT action (function)'} | ${LexEvent.PARSE_TEXT} | ${'text'}     | ${text6}
     `('$testName', async ({ actions, event, stateSelector, value }) => {
         let state: LexState = { ...defaultLexState };
         actions.forEach((action) => {
