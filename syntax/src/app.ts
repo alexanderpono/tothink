@@ -1,7 +1,15 @@
-import { defaultLexState, lex, lexReducer as r } from './lexReducer';
+import { defaultLexState, lex, lexReducer } from './lexReducer';
 
-const state = { ...defaultLexState };
-console.log(
-    'state(useTable)=',
-    r(r(r(state, lex.ids(['1'])), lex.spaces([' '])), lex.limiters([';']))
-);
+let state = { ...defaultLexState };
+const actions = [
+    lex.spaces([' ']),
+    lex.limiters([';', '(', ')']),
+    lex.compile(),
+    lex.parseLine('function a(b);')
+];
+
+actions.forEach((action) => {
+    state = lexReducer(state, action);
+});
+
+console.log('state=', state);
