@@ -4,3 +4,4 @@ package-lock.json
 *.tmp
 html-js-mfti
 .vscode
+temp

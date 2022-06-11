@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>positioning</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 10000px;
+        }
+
+        .hint {
+            border: 1px solid #00ff00;
+            padding: 10px 10px 20px 10px;
+            width: 150px;
+            /*-webkit-box-sizing: content-box;*/
+            /*-moz-box-sizing: content-box;*/
+            box-sizing: border-box;
+            position: fixed;
+            right: 25px;
+            top: 25px;
+        }
+
+        .hint > button {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background-color: #00aa00;
+            /*border: 0px solid red;*/
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="hint">
+        Для того, чтобы пользоваться сайтом, Вам нужно разрешить использование cookies.
+        <button type="button">Разрешаю</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1><%= title %></h1>
+Состав:
+<% function member(member){ %>
+<li><strong><%= member.name %></strong>
+    <%= member.start %>
+    <%
+    if(member.end) {
+    %>по	 <%= member.end %>
+    <% } %></li>
+< % } %>
+<ul>
+    <% members.map(member); %>
+</ul>
+
+<script>
+    var ret = ejs.render(str, {
+        title: title,
+        members: members
+    });
+</script>
+<h1>The Rolling Stones</h1>
+Состав:
+<ul>
+    <li><strong>Mick Jagger</strong> с 1962 </li>
+    <li><strong>Keith Richards</strong> с 1962 </li>
+    <li><strong>Charlie Watts</strong> с 1962 </li>
+    <li><strong>Brian Jones</strong> с 1962 по 1969</li>
+    <li><strong>Bill Wyman</strong> с 1962 по 1993</li>
+    <li><strong>Mick Taylor</strong> с 1969 по 1974</li>
+    <li><strong>Ronnie Wood</strong> с 1974 </li>
+</ul>
+
+
+//фильтры в EJS
+<script>
+    var members = [
+        { name: 'John', born: 1940 },
+        { name: 'Paul', born: 1942},
+        { name: 'George', born: 1943},
+        { name: 'Ringo', born: 1940}
+    ];
+    var str = "<p><%=: members | map:'name'| sort | join:'-' %></p>";
+    var html = ejs.render(str, {
+        members: members
+    });
+</script>
+<p>George-John-Paul-Ringo</p>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Урожай</title>
+    <style>
+        * { padding:0; margin: 0; box-sizing: border-box;}
+        body {
+            overflow: hidden;
+            margin: 10px;
+        }
+        ul {
+            list-style-type: none;
+            font-size: 0;
+        }
+        .gallery {
+            width: 100%;
+            transform: translateX(0%);
+            transition: transform 0.5s ease;
+            white-space: nowrap;
+        }
+        .image {
+            vertical-align: middle;
+            width: 25%;
+            display: inline-block;
+            position: relative;
+            padding: 16px;
+        }
+        .image img{
+            width: 100%;
+        }
+        .image:hover {
+            background: #fff;
+            z-index: 999;
+            box-shadow: 0px -2px 10px #666;
+            padding: 16px;
+        }
+        .image:hover:after{
+            position: absolute;
+            content: attr(data-description);
+            width: 100%;
+            left: 0;
+            display: block;
+            white-space: normal;
+            font-size: 12px;
+            padding: 1em;
+            box-sizing: border-box;
+            background: #fff;
+            box-shadow: 0px 10px 10px #666;
+            z-index: 999;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        fieldset {
+            text-align: center;
+            margin: 10px;
+            border: 0;
+        }
+
+        input {
+            display: none;
+        }
+        label:after{
+            content: "◎";
+            font-size: 1em;
+            color: #333;
+        }
+
+        input:nth-of-type(1):checked ~ fieldset label:nth-of-type(1):after,
+        input:nth-of-type(2):checked ~ fieldset label:nth-of-type(2):after,
+        input:nth-of-type(3):checked ~ fieldset label:nth-of-type(3):after,
+        input:nth-of-type(4):checked ~ fieldset label:nth-of-type(4):after,
+        input:nth-of-type(5):checked ~ fieldset label:nth-of-type(5):after,
+        input:nth-of-type(6):checked ~ fieldset label:nth-of-type(6):after {
+            content: "◉";
+            color: #528cc9;
+        }
+
+        input:nth-of-type(1):checked ~ .gallery { transform: translateX(0%); }
+        input:nth-of-type(2):checked ~ .gallery { transform: translateX(-75%); }
+        input:nth-of-type(3):checked ~ .gallery { transform: translateX(-150%); }
+        input:nth-of-type(4):checked ~ .gallery { transform: translateX(-225%); }
+        input:nth-of-type(5):checked ~ .gallery { transform: translateX(-300%); }
+        input:nth-of-type(6):checked ~ .gallery { transform: translateX(-375%); }
+
+        .modal:target{
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left:0;
+            bottom:0;
+            right:0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.7);
+            z-index: 1;
+        }
+        .modal a {
+            position: absolute;
+            right: 10px;
+            top:0px;
+            font-size: 32px;
+            text-decoration: none;
+            color: #eee;
+            z-index: 2;
+            text-shadow: 2px 2px #000;
+        }
+        .modal img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            z-index: 1;
+            padding: 32px;
+        }
+    </style>
+</head>
+<body>
+
+<input type="radio" id="block1" name="gallery" checked>
+<input type="radio" id="block2" name="gallery">
+<input type="radio" id="block3" name="gallery">
+<input type="radio" id="block4" name="gallery">
+<input type="radio" id="block5" name="gallery">
+<input type="radio" id="block6" name="gallery">
+
+<ul class="gallery">
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image01"><img src="https://cs7.pikabu.ru/images/previews_comm/2019-02_1/1549044407129368555.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image02"><img src="https://expert-agroteh.md/wp-content/uploads/2015/05/Dovlecei-300x300.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image03"><img src="http://shkolazhizni.ru/img/content/i67/67837.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image04"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu3RRk285DLC5ZGk1PH5Hp2Dm1hJO0r9p1sEVXBeomiQeOyN6_Kw"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image05"><img src="http://s14.sinaimg.cn/mw690/97b3437btx6DeLv6Yclcd&690"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image06"><img src="http://agro-ukraine.com/imgs/board/86/909386-1-325x325.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image07"><img src="https://sekretikii.ru/wp-content/uploads/2019/02/varenaya_cvetnaya_kapusta-201042.png"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image08"><img src="https://agronomu.com/media/res/1/4/7/6/4/14764.ojx3wo.600.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image09"><img src="https://www.factroom.ru/wp-content/uploads/2019/03/10-nasyshchennyh-vitaminami-produktov-kotorye-pomogut-perezhit-vesennij-avitaminoz-04-1250x832.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image10"><img src="https://s3.amazonaws.com/files.collageplatform.com.prod/image_cache/1010x580_fit/551971df07a72c625f603e56/ac23fae1c385ad7e1b095ce96756fb82.jpeg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image11"><img src="http://vashechudo.ru/images/281.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image12"><img src="http://tyum-pravda.ru/images/stories/2011/228/228-15-1.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image13"><img src="https://www.rareseeds.com/assets/1/14/DimLarge/Greens-Rapini-Broccoli-BR103-DSC02524.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image14"><img src="https://www.gastronom.ru/binfiles/images/20160530/b58603b9.jpg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image15"><img src="http://elisheva.ru/uploads/posts/2015-05/1431683048_4-schavel.jpeg"></a>
+    </li>
+    <li class="image" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Congue eu consequat ac felis donec et odio. Nisl nunc mi ipsum faucibus vitae aliquet. A iaculis at erat pellentesque adipiscing commodo elit. Suspendisse potenti nullam ac tortor vitae. Nisl suscipit adipiscing bibendum est ultricies integer. Convallis convallis tellus id interdum velit laoreet. Pulvinar pellentesque habitant morbi tristique. Diam vulputate ut pharetra sit amet aliquam id diam. Sollicitudin nibh sit amet commodo nulla.">
+        <a href="#image16"><img src="https://www.serajtajhiz.com/wp-content/uploads/Q9dU6-1024x704.jpg"></a>
+    </li>
+</ul>
+<div class="modal" id="image01">
+    <img src="https://scontent-atl3-1.cdninstagram.com/vp/c610376e9355d184d982f20073cc89d8/5D32022F/t51.2885-15/e35/55827200_408240609991834_7783162630649379819_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image02">
+    <img src="http://www.zumi.md/media/2014/06/dovlecelul-rege-in-bucataria-de-vara.-iata-3-reete-cu-dovlecel.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image03">
+    <img src="http://shkolazhizni.ru/img/content/i67/67837.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image04">
+    <img src="https://scontent.fiev11-1.fna.fbcdn.net/v/t1.0-9/22780175_1562613117159251_6906874369010144122_n.jpg?_nc_cat=108&_nc_ht=scontent.fiev11-1.fna&oh=44edfec08d35ab5c0bc865523b194ff0&oe=5D740A0E">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image05">
+    <img src="https://media.gettyimages.com/photos/roundhead-cabbage-picture-idfdc900226?s=2048x2048">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image06">
+    <img src="http://agro-ukraine.com/imgs/board/86/909386-1-325x325.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image07">
+    <img src="https://sekretikii.ru/wp-content/uploads/2019/02/varenaya_cvetnaya_kapusta-201042.png">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image08">
+    <img src="https://agronomu.com/media/res/1/4/7/6/4/14764.ojx3wo.600.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image09">
+    <img src="https://www.factroom.ru/wp-content/uploads/2019/03/10-nasyshchennyh-vitaminami-produktov-kotorye-pomogut-perezhit-vesennij-avitaminoz-04-1250x832.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image10">
+    <img src="https://s3.amazonaws.com/files.collageplatform.com.prod/image_cache/1010x580_fit/551971df07a72c625f603e56/ac23fae1c385ad7e1b095ce96756fb82.jpeg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image11">
+    <img src="http://vashechudo.ru/images/281.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image12">
+    <img src="http://tyum-pravda.ru/images/stories/2011/228/228-15-1.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image13">
+    <img src="https://www.rareseeds.com/assets/1/14/DimLarge/Greens-Rapini-Broccoli-BR103-DSC02524.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image14">
+    <img src="https://www.gastronom.ru/binfiles/images/20160530/b58603b9.jpg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image15">
+    <img src="http://elisheva.ru/uploads/posts/2015-05/1431683048_4-schavel.jpeg">
+    <a href="#">✖</a>
+</div>
+<div class="modal" id="image16">
+    <img src="https://www.serajtajhiz.com/wp-content/uploads/Q9dU6-1024x704.jpg">
+    <a href="#">✖</a>
+</div>
+
+<fieldset>
+    <label for="block1"></label>
+    <label for="block2"></label>
+    <label for="block3"></label>
+    <label for="block4"></label>
+    <label for="block5"></label>
+    <label for="block6"></label>
+</fieldset>
+
+</body>
+</html>

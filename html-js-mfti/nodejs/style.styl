@@ -1,0 +1,77 @@
+add(a=2, b=3)
+  a + b
+
+
+fonts = Arial, sans-serif
+
+p {
+  font bold fonts
+  line-height: add(5px, 6)
+}
+
+borderRadius(r=5px)
+  -webkit-border-radius r
+  -moz-border-radius r
+  border-radius r
+
+div
+  borderRadius(3px)
+
+
+//код
+div
+p
+  color red
+  &:hover
+    text-decoration underline
+
+//компилируется в CSS
+div, p {
+  color: red;
+}
+
+div:hover, p:hover {
+  text-decoration: underline;
+}
+
+
+//код
+.Box {
+  width: w = 150px
+  height: h = 80px
+  margin-left: -(w / 2)
+  margin-top: -(h / 2)
+}
+
+//компилируется в CSS
+.Box {
+  width: 150px;
+  height: 80px;
+  margin-left: -75px;
+  margin-top: -40px;
+}
+
+
+//код
+position()
+  position: arguments
+  z-index: 1 unless @z-index
+
+.Box1
+  z-index: 20
+  position: absolute
+
+.Box2
+  position: absolute
+
+//компилируется в CSS
+.Box1 {
+  z-index: 20;
+  position: absolute;
+}
+
+.Box2 {
+  position: absolute
+  z-index: 1;
+}
+

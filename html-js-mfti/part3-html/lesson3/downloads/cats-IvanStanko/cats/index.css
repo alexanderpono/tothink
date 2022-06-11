@@ -1,0 +1,240 @@
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+body{
+    background: #e6e6e6;
+}
+.header{
+    width: 100%;
+    text-align: center;
+    margin: 40px auto;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+}
+.menu{
+    width: 200px;
+    background: #c3c3c3;
+    padding-left: 0px;
+    font-family: 'Roboto', sans-serif;
+}
+li{
+    width: 200px;
+    height: 40px;
+    list-style-type: none;
+    border-bottom: solid 1px;
+    padding-top: 15px;
+}
+label{
+    width: 200px;
+    height: 30px;
+    padding-left: 10px;
+}
+ul{
+  margin: 0px;
+    padding: 0px;
+    width: 200px;
+
+}
+input{
+    display: none;
+}
+
+#button-1:checked ~.gallery .photo-3,#button-1:checked ~.gallery .photo-4{
+    opacity: 0.6;
+}
+#button-2:checked ~.gallery .photo-1,#button-2:checked ~.gallery .photo-2{
+    opacity: 0.6;
+}
+#button-3:checked ~.gallery .photo-5,#button-3:checked ~.gallery .photo-6{
+    opacity: 0.6;
+}
+#button-4:checked ~.gallery .photo-7,#button-4:checked ~.gallery .photo-8{
+    opacity: 0.6;
+}
+#button-1:checked ~.menu #li-1{
+    background: #5c5c5c;
+    color: white;
+    border-bottom-color: black;
+}
+#button-2:checked ~.menu #li-2{
+    background: #5c5c5c;
+    color: white;
+    border-bottom-color: black;
+}
+#button-3:checked ~.menu #li-3{
+     background: #5c5c5c;
+     color: white;
+     border-bottom-color: black;
+ }
+#button-4:checked ~.menu #li-4{
+    background: #5c5c5c;
+    color: white;
+    border-bottom-color: black;
+}
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    margin:-2.5px 5px -5px;
+    width: 650px;
+
+}
+.rating{
+    width: 200px;
+}
+.ratingItems{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 200px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    background:  #c3c3c3;
+}
+.ratingTitle{
+    font-size: 1.3em;
+    color: red;
+}
+#labelRating{
+    font-size: 0.9em;
+    padding-left: 20px;
+    text-align: center;
+}
+.grRating{
+    display: block;
+    position: relative;
+    height: 30px;
+}
+.ratingItem-9{
+    position: absolute;
+    background: linear-gradient(45deg, green, white);
+    width: 110px;
+    height: 16px;
+}
+.ratingItem-8{
+    position: absolute;
+    width: 95px;
+    height: 16px;
+    background: linear-gradient(45deg, yellow, white);
+}
+.ratingItem-10{
+    position: absolute;
+    width: 110px;
+    height: 16px;
+    background: linear-gradient(45deg, green, white);
+}
+.ratingItem-4{
+    position: absolute;
+    width: 48px;
+    height: 16px;
+    background: linear-gradient(45deg, red, white);
+}
+.grRating span{
+    position: absolute;
+    right: 20px;
+    font-weight: bold;
+}
+#checkSpan{
+    position: relative;
+    bottom: -4px;
+}
+#labelRating span:after{
+    display: inline-block;
+    content: " ";
+    height: 16px;
+    width: 16px;
+    background-image: url("images/checkbox_empty1.png");
+}
+#ratingCheckbox:checked ~#labelRating span:after{
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background-image: url("images/checkbox_full1.png");
+}
+
+
+#ratingCheckbox:checked  ~.rating4 {
+   order:3 ;
+}
+#ratingCheckbox:checked ~.rating8 {
+    order:2 ;
+}
+#ratingCheckbox:checked ~.rating9 {
+    order:1 ;
+}
+
+.photo{
+   margin: 2.5px 5px;
+    display:inline-block;
+    position:relative;
+}
+.infoCat{
+    position:absolute;
+    bottom:10px;
+    left:0px;
+    color: white;
+    background: black;
+    opacity: 0.6;
+    display: none;
+}
+.photo:hover .infoCat{
+   display: inline;
+}
+.photo-1 img{
+    width: 200px;
+    height: 250px;
+}
+.photo-2 img{
+    width: 410px;
+    height: 250px;
+}
+.photo-3 img{
+    width: 200px;
+    height: 250px;
+}
+.photo-4 img{
+    width: 200px;
+    height: 250px;
+}
+.photo-5 img{
+    width: 200px;
+    height: 250px;
+}
+.photo-6 img{
+    width: 410px;
+    height: 250px;
+}
+.photo-7 img{
+    width: 200px;
+    height: 250px;
+}
+.photo-8  img{
+    width: 620px;
+    height: 250px;
+}
+
+.footer{
+    padding-top: 15px;
+    position: relative;
+    display: flex;
+    height: 20px;
+    width: 100%;
+    bottom: 1px;
+    border-top: solid 1px;
+    margin:10px -10px;
+}
+.copyright{
+  padding-left: 40px;
+}
+.address{
+    position: absolute;
+    padding-right: 40px;
+    right: 1px;
+}
