@@ -10,6 +10,7 @@ module.exports = {
         '!src/app.ts',
         '!src/**/index.ts',
         '!src/**/*.d.ts',
+        '!src/cards/**/*.ts',
     ],
     testEnvironment: 'jsdom',
     setupFilesAfterEnv: ['<rootDir>/internals/jestSettings.js'],
