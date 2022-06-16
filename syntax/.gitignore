@@ -1,2 +1,5 @@
 coverage
 cards
+*.rar
+*.bat
+output
