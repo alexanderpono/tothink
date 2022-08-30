@@ -18,6 +18,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
-        runtimeChunk: 'single',
+        splitChunks: {
+            chunks: 'all',
+        },
     },
 };
