@@ -10,3 +10,4 @@ coverage
 *.bat
 cards
 output
+dist
