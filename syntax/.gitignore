@@ -3,3 +3,4 @@ cards
 *.rar
 *.bat
 output
+node_modules

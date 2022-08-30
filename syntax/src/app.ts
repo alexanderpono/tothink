@@ -1,9 +1,5 @@
-import {
-    createReducerSpec,
-    lexReducerSpecModel,
-    createReducerSpec2,
-    lexReducerSpecModel2
-} from './cards';
+import { createReducerSpec, lexReducerSpecModel } from './cards';
+import { createReducerSpec2, lexReducerSpecModel2 } from './cards/reducerModel2';
 import { defaultLexState, lex, lexReducer } from './lexReducer';
 import { defaultTextState, textReducer, TextState } from './textReducer';
 
