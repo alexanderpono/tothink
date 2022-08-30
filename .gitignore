@@ -5,3 +5,8 @@ package-lock.json
 html-js-mfti
 .vscode
 temp
+coverage
+*.rar
+*.bat
+cards
+output
