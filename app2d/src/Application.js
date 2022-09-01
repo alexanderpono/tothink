@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { Holy } from './levels/Holy';
+import { Game } from './systems/Game';
 
 export class Application {
     constructor() {
@@ -15,7 +15,7 @@ export class Application {
             this.render();
         }, -25)
 
-        this.level = new Holy();
+        this.game = new Game(this);
     }
 
     get view() {
@@ -24,7 +24,7 @@ export class Application {
 
     start() {
         this.ticker.start();
-        this.level.init(this);
+        this.game.start();
     }
 
     render() {
