@@ -1,6 +1,5 @@
-import logoImg from "../assets/logo.svg";
 import * as PIXI from 'pixi.js';
-import { Ticker } from "pixi.js";
+import { Holy } from './levels/Holy';
 
 export class Application {
     constructor() {
@@ -11,14 +10,12 @@ export class Application {
         })
         this.root = new PIXI.Container();
 
-        this.image = new Image();
-        this.image.src = logoImg;
-
         this.ticker = new PIXI.Ticker();
         this.ticker.add(() => {
             this.render();
         }, -25)
 
+        this.level = new Holy();
     }
 
     get view() {
@@ -26,20 +23,8 @@ export class Application {
     }
 
     start() {
-        this.phase = 0;
-
-        const { width, height } = this.view;
-        this.sprite = new PIXI.Sprite(PIXI.Texture.from(this.image))
-        this.sprite.position.set(width/2, height/2);
-        this.sprite.scale.set(0.9, 0.9);
-        this.sprite.anchor.set(0.5, 0.5);
-        this.root.addChild(this.sprite);
-
-        this.ticker.add(() => {
-            this.phase += 0.01;
-            this.sprite.rotation = this.phase;
-        })
         this.ticker.start();
+        this.level.init(this);
     }
 
     render() {
