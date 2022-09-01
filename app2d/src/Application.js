@@ -1,5 +1,6 @@
 import logoImg from "../assets/logo.svg";
 import * as PIXI from 'pixi.js';
+import { Ticker } from "pixi.js";
 
 export class Application {
     constructor() {
@@ -12,6 +13,12 @@ export class Application {
 
         this.image = new Image();
         this.image.src = logoImg;
+
+        this.ticker = new PIXI.Ticker();
+        this.ticker.add(() => {
+            this.render();
+        }, -25)
+
     }
 
     get view() {
@@ -28,13 +35,11 @@ export class Application {
         this.sprite.anchor.set(0.5, 0.5);
         this.root.addChild(this.sprite);
 
-        const gameLoop = () => {
+        this.ticker.add(() => {
             this.phase += 0.01;
             this.sprite.rotation = this.phase;
-            this.render();
-            requestAnimationFrame(gameLoop);
-        };
-        requestAnimationFrame(gameLoop);
+        })
+        this.ticker.start();
     }
 
     render() {
