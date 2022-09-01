@@ -11,16 +11,17 @@ export class BunnyLevel extends Level {
     }
 
     init(app) {
+        const { game } = app;
         this.phase = 0;
 
         const { width, height } = app.view;
         this.sprite = new PIXI.Sprite(PIXI.Texture.from(this.image))
         this.sprite.position.set(width/2, height/2);
-        this.sprite.scale.set(5, 5);
+        this.sprite.scale.set(5);
         this.sprite.anchor.set(0.5, 0.5);
-        app.root.addChild(this.sprite);
+        game.world.addChild(this.sprite);
 
-        app.ticker.add(() => {
+        game.ticker.add(() => {
             this.phase += 0.01;
             this.sprite.rotation = this.phase;
         })
