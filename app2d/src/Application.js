@@ -45,4 +45,9 @@ export class Application {
     render() {
         this.renderer.render(this.root);
     }
+
+    destroy() {
+        this.ticker.destroy();
+        this.render.destroy();
+    }
 }
