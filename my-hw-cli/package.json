@@ -1,0 +1,12 @@
+{
+  "name": "my-hw-cli",
+  "version": "1.0.0",
+  "description": "Hello CLI",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
