@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 const { description, name, version } = require('./package.json');
 
 const options = process.argv.slice(2);
@@ -15,13 +15,7 @@ Usage
 if (options.includes('--version')) {
     console.log(VERSION_MESSAGE);
     process.exit(0);
-}
-
-if (options.includes('--help')) {
+} else {
     console.log(HELP_MESSAGE);
     process.exit(0);
 }
-
-console.log('Hello CLI');
-console.log(process.argv);
-
