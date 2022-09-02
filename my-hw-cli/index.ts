@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-"use strict";
 const { description, name, version } = require('./package.json');
+
 const options = process.argv.slice(2);
 const VERSION_MESSAGE = `${name} ${version}`;
 const HELP_MESSAGE = `${VERSION_MESSAGE}
@@ -11,13 +11,17 @@ Usage
 --version Installed package version
 
 `;
+
 if (options.includes('--version')) {
     console.log(VERSION_MESSAGE);
     process.exit(0);
 }
+
 if (options.includes('--help')) {
     console.log(HELP_MESSAGE);
     process.exit(0);
 }
+
 console.log('Hello CLI');
 console.log(process.argv);
+
