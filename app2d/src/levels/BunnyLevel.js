@@ -12,19 +12,22 @@ export class BunnyLevel extends Level {
 
         const { width, height } = app.view;
 
-        const bunny = new Entity({
-            x: width/2,
-            y: height/2,
-            size: 5,
-            spriteTex: app.pack.bunnyTex
-        })
+        for (let i = 0; i<10; i++) {
+            const v = Math.random() * 4 + 3;
+            const ang = Math.random() * Math.PI * 3;
+    
+            const bunny = new Entity({
+                x: width * Math.random(),
+                y: height * Math.random(),
+                size: 5,
+                spriteTex: app.pack.bunnyTex,
+                dummy: { v, ang },
+                width,
+                height
+            })
 
-        game.add(bunny);
-
-        game.ticker.add(() => {
-            this.phase += 0.01;
-            bunny.rotation = this.phase;
-            bunny.syncPixi();
-        })
+            game.add(bunny);
+    
+        }
     }
 }

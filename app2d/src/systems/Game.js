@@ -22,6 +22,20 @@ export class Game {
         this.ticker = new PIXI.Ticker();
         this.app.root.addChild(this.world);
 
+        this.ticker.add(() => {
+            for (let i=0; i<this.entities.length; i++) {
+                const entity = this.entities[i];
+                entity.updatePhys(1);
+            }
+            for (let i=0; i<this.entities.length; i++) {
+                const entity = this.entities[i];
+                entity.script && entity.script();
+            }
+            for (let i=0; i<this.entities.length; i++) {
+                const entity = this.entities[i];
+                entity.syncPixi();
+            }
+        });
         this.entities = [];
     }
 
