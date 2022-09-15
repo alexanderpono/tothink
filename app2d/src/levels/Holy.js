@@ -23,7 +23,10 @@ export class Holy extends Level {
 
         game.ticker.add(() => {
             this.phase += 0.01;
-            this.sprite.rotation = this.phase;
+
+            const tex = this.sprite.texture;
+            tex.frame.width = tex.baseTexture.width * this.phase;
+            tex.updateUvs();
         })
     }
 }

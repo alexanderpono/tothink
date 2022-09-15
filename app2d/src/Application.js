@@ -1,5 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { Game } from './systems/Game';
+import { Menu } from './systems/Menu';
+import { Pack } from './systems/Pack';
 
 export class Application {
     constructor() {
@@ -16,6 +18,8 @@ export class Application {
         }, -25)
 
         this.game = new Game(this);
+        this.pack = new Pack(this);
+        this.menu = new Menu(this);
     }
 
     get view() {
@@ -24,7 +28,7 @@ export class Application {
 
     start() {
         this.ticker.start();
-        this.game.start();
+        this.pack.start();
     }
 
     render() {

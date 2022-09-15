@@ -1,12 +1,10 @@
 import * as PIXI from 'pixi.js';
-import { Holy } from '../levels/Holy';
-import { BunnyLevel } from '../levels/BunnyLevel';
 
 export class Game {
     constructor(app) {
         this.app = app;
 
-        this.level = new Holy();
+        this.level = null;
         this.app.ticker.add(() => {
             if (this.ticker) {
                 this.ticker.update();
@@ -29,12 +27,5 @@ export class Game {
         this.level = level;
         this.reset();
         this.level.init(this.app)
-    }
-
-    start() {
-        this.initLevel(new Holy());
-        setTimeout(() => {
-            this.initLevel(new BunnyLevel());
-        }, 3000)
     }
 }
