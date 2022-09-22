@@ -2,6 +2,8 @@ import * as PIXI from 'pixi.js';
 import { Game } from './systems/Game';
 import { Menu } from './systems/Menu';
 import { Pack } from './systems/Pack';
+import { Visual } from './systems/Visual';
+import { DummyPhis } from './systems/DummyPhis';
 
 export class Application {
     constructor() {
@@ -20,6 +22,8 @@ export class Application {
         this.game = new Game(this);
         this.pack = new Pack(this);
         this.menu = new Menu(this);
+        this.visual = new Visual(this);
+        this.dummyPhis = new DummyPhis(this);
     }
 
     get view() {

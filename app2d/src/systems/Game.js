@@ -22,11 +22,8 @@ export class Game {
         this.ticker = new PIXI.Ticker();
         this.app.root.addChild(this.world);
 
-        this.ticker.add(() => {
-            for (let i=0; i<this.entities.length; i++) {
-                const entity = this.entities[i];
-                entity.updatePhys(1);
-            }
+        this.ticker.add((delta) => {
+            this.app.dummyPhis.loop(delta);
             for (let i=0; i<this.entities.length; i++) {
                 const entity = this.entities[i];
                 entity.script && entity.script();
@@ -41,10 +38,7 @@ export class Game {
 
     add(entity) {
         this.entities.push(entity);
-
-        if (entity.pixi) {
-            this.world.addChild(entity.pixi);
-        }
+        this.app.visual.entityAdded(entity);
     }
 
     remove(entity) {
@@ -52,10 +46,7 @@ export class Game {
         if (ind >= 0) {
             this.entities.splice(ind, 1);
         }
-
-        if (entity.pixi) {
-            this.world.removeChild(entity.pixi);
-        }
+        this.app.visual.entityRemoved(entity);
     }
 
     initLevel(level) {
