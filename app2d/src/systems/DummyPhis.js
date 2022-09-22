@@ -35,4 +35,25 @@ export class DummyPhis {
             }
         }
     }
+
+    entityAdded(entity) {
+        const { props } = entity;
+        if (props.dummy) {
+            if (props.dummy.v) {
+                entity.dummy = {
+                    vx: Math.cos(props.dummy.ang) * props.dummy.v,
+                    vy: Math.sin(props.dummy.ang) * props.dummy.v
+                }
+            } else {
+                entity.dummy = {
+                    vx: props.dummy.vx,
+                    vy: props.dummy.vy
+                }
+
+            }
+        }
+    }
+
+    entityRemoved(entity) {
+    }
 }

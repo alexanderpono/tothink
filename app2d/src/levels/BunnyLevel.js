@@ -8,8 +8,6 @@ export class BunnyLevel extends Level {
 
     init(app) {
         const { game } = app;
-        this.phase = 0;
-
         const { width, height } = app.view;
 
         for (let i = 0; i<10; i++) {
@@ -27,7 +25,6 @@ export class BunnyLevel extends Level {
             })
 
             game.add(bunny);
-    
         }
     }
 }

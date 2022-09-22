@@ -16,15 +16,13 @@ export class FlowerLevel extends Level {
             x: width/2,
             y: height/2,
             size: 1,
-            spriteTex: app.pack.flowerTex
+            spriteTex: app.pack.flowerTex,
+            rotation: 0,
+            script: function () {
+                this.rotation += 0.01;
+            }
         })
 
         game.add(flower);
-
-        game.ticker.add(() => {
-            this.phase += 0.01;
-            flower.rotation = this.phase;
-            flower.syncPixi();
-        })
     }
 }

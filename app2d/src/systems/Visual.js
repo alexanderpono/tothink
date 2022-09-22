@@ -31,4 +31,17 @@ export class Visual {
         }
 
     }
+
+    loop() {
+        const {entities} = this.app.game;
+        for (let i = 0; i<entities.length; i++) {
+            const entity = entities[i];
+
+            if (entity.pixi) {
+                entity.pixi.position.set(entity.x, entity.y);
+                entity.pixi.rotation = entity.rotation;
+            }
+        }
+    }
+
 }

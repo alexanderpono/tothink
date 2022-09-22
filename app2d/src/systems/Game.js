@@ -26,12 +26,9 @@ export class Game {
             this.app.dummyPhis.loop(delta);
             for (let i=0; i<this.entities.length; i++) {
                 const entity = this.entities[i];
-                entity.script && entity.script();
+                entity.script && entity.script.call(entity);
             }
-            for (let i=0; i<this.entities.length; i++) {
-                const entity = this.entities[i];
-                entity.syncPixi();
-            }
+            this.app.visual.loop(delta);
         });
         this.entities = [];
     }
@@ -39,6 +36,7 @@ export class Game {
     add(entity) {
         this.entities.push(entity);
         this.app.visual.entityAdded(entity);
+        this.app.dummyPhis.entityAdded(entity);
     }
 
     remove(entity) {
