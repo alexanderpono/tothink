@@ -19,11 +19,23 @@ export class Application {
             this.render();
         }, -25)
 
-        this.game = new Game(this);
+        this.runners = {
+            'entityAdded': new PIXI.Runner('entityAdded'),
+            'entityRemoved': new PIXI.Runner('entityRemoved'),
+            'loop': new PIXI.Runner('loop')
+        };
+
+        this.addSystem(this.game = new Game(this));
         this.pack = new Pack(this);
         this.menu = new Menu(this);
-        this.visual = new Visual(this);
-        this.dummyPhis = new DummyPhis(this);
+        this.addSystem(this.visual = new Visual(this));
+        this.addSystem(this.dummyPhis = new DummyPhis(this));
+    }
+
+    addSystem(system) {
+        for (let key in this.runners) {
+            this.runners[key].add(system);
+        }
     }
 
     get view() {

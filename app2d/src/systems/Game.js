@@ -20,15 +20,14 @@ export class Game {
         }
         this.world = new PIXI.Container();
         this.ticker = new PIXI.Ticker();
-        this.app.root.addChild(this.world);
+        this.app.root.addChildAt(this.world, 0);
 
         this.ticker.add((delta) => {
-            this.app.dummyPhis.loop(delta);
             for (let i=0; i<this.entities.length; i++) {
                 const entity = this.entities[i];
                 entity.script && entity.script.call(entity);
             }
-            this.app.visual.loop(delta);
+            this.app.runners.loop.run(delta);
         });
         this.entities = [];
     }
