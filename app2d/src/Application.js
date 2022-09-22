@@ -25,16 +25,17 @@ export class Application {
             'loop': new PIXI.Runner('loop')
         };
 
-        this.addSystem(this.game = new Game(this));
-        this.pack = new Pack(this);
-        this.menu = new Menu(this);
-        this.addSystem(this.visual = new Visual(this));
-        this.addSystem(this.dummyPhis = new DummyPhis(this));
+        this.addSystem('game', Game);
+        this.addSystem('visual', Visual);
+        this.addSystem('dummyPhis', DummyPhis);
+        this.addSystem('pack', Pack);
+        this.addSystem('menu', Menu);
     }
 
-    addSystem(system) {
+    addSystem(name, classRef) {
+        this[name] = new classRef(this);
         for (let key in this.runners) {
-            this.runners[key].add(system);
+            this.runners[key].add(this[name]);
         }
     }
 

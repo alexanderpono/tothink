@@ -34,8 +34,7 @@ export class Game {
 
     add(entity) {
         this.entities.push(entity);
-        this.app.visual.entityAdded(entity);
-        this.app.dummyPhis.entityAdded(entity);
+        this.app.runners.entityAdded.run(entity);
     }
 
     remove(entity) {
@@ -43,7 +42,7 @@ export class Game {
         if (ind >= 0) {
             this.entities.splice(ind, 1);
         }
-        this.app.visual.entityRemoved(entity);
+        this.app.runners.entityRemoved.run(entity);
     }
 
     initLevel(level) {
