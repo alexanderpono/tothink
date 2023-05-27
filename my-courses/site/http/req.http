@@ -1,5 +1,5 @@
 #get Anauthorized HTTP code
-POST http://localhost:3000/api/users
+POST http://localhost:4000/api/users
 Content-type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-type: application/json
 
 ###
 #get answer: name: This parameter is required
-POST http://localhost:3000/api/users
+POST http://localhost:4000/api/users
 Content-type: application/json
 Authorization: Basic user:password
 X-User-Name: Anton2
@@ -19,7 +19,7 @@ X-User-Name: Anton2
 
 ###
 #get answer: name: Invalid parameter data type, expected: String
-POST http://localhost:3000/api/users
+POST http://localhost:4000/api/users
 Content-type: application/json
 Authorization: Basic user:password
 X-User-Name: Anton2
@@ -29,7 +29,7 @@ X-User-Name: Anton2
 }
 
 ###
-POST http://localhost:3000/api/users
+POST http://localhost:4000/api/users
 Content-type: application/json
 Authorization: Basic user:password
 X-User-Name: Anton2
@@ -41,38 +41,38 @@ X-User-Name: Anton2
 
 ###
 #get forbidden: user Peter has not role 'admin'. Admin is required for this route
-GET http://localhost:3000/api/users
+GET http://localhost:4000/api/users
 Authorization: Basic user:password
 X-User-Name: Peter
 
 
 ###
 #get 401: user Peter12341235412 doesnot exist
-GET http://localhost:3000/api/users
+GET http://localhost:4000/api/users
 Authorization: Basic user:password
 X-User-Name: Peter12341235412
 
 
 ###
-GET http://localhost:3000/api/users
+GET http://localhost:4000/api/users
 Authorization: Basic user:password
 X-User-Name: Anton2
 
 
 ###
 #get answer: x-user-name is empty - so 401 unauthorized
-GET http://localhost:3000/api/users
+GET http://localhost:4000/api/users
 Authorization: Basic user:password
 ###
 
 
-GET http://localhost:3000/api/users/1
+GET http://localhost:4000/api/users/1
 Authorization: Basic user:password
 X-User-Name: Anton2
 ###
 
 
-PUT http://localhost:3000/api/users/1
+PUT http://localhost:4000/api/users/1
 Content-type: application/json
 Authorization: Basic user:password
 X-User-Name: Anton2
@@ -84,7 +84,7 @@ X-User-Name: Anton2
 }
 
 ###
-PUT http://localhost:3000/api/users/1
+PUT http://localhost:4000/api/users/1
 Content-type: application/json
 Authorization: Basic user:password
 X-User-Name: Anton2
@@ -95,7 +95,7 @@ X-User-Name: Anton2
 }
 
 ###
-DELETE http://localhost:3000/api/users/39
+DELETE http://localhost:4000/api/users/39
 Content-type: application/json
 Authorization: Basic user:password
 X-User-Name: Anton2
@@ -107,7 +107,7 @@ X-User-Name: Anton2
 
 ###
 #auth 
-POST http://localhost:3000/api/auth
+POST http://localhost:4000/api/auth
 Content-type: application/json
 
 {
@@ -116,7 +116,7 @@ Content-type: application/json
 
 ###
 #auth 
-POST http://localhost:3000/api/auth
+POST http://localhost:4000/api/auth
 Content-type: application/json
 
 {

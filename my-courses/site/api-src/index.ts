@@ -1,5 +1,5 @@
-const port = 3000;
-console.log(`index.ts! listening ${3000}`);
+const port = 4000;
+console.log(`index.ts! listening ${port}`);
 
 import { createExpressServer } from 'routing-controllers';
 import { ApiUserController } from './controllers/ApiUserController';
