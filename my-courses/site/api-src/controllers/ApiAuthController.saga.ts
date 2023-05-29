@@ -4,7 +4,7 @@ import { Auth } from '@api-src/models/Auth';
 import { getUsers } from './ApiUserController.saga';
 import { User } from '@api-src/models/User';
 
-export function validateAuth(input: Auth) {
+export function validateAuth(input: Auth): Promise<Auth> {
     return new Promise((resolve, reject) => {
         const rootSchema = {
             userName: {
