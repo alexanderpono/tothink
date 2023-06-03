@@ -2,11 +2,13 @@
   "name": "ts-ser",
   "version": "1.0.0",
   "description": "try ts-serializable",
-  "main": "src/app.ts",
+  "main": "ui/ui.tsx",
   "scripts": {
     "start": "ts-node --esm src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec ts-node --esm src/app.ts"
+    "apidev": "nodemon --exec ts-node --esm src/app.ts",
+    "build": "webpack --mode development",
+    "uidev": "webpack-dev-server --mode development"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +22,21 @@
     "ts-node": "^10.9.1",
     "ts-serializable": "^3.0.28",
     "typescript": "^5.1.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "@babel/preset-react": "^7.22.3",
+    "@babel/preset-typescript": "^7.21.5",
+    "@types/react": "^18.2.8",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.85.0",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
   }
 }
