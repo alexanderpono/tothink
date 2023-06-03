@@ -1,18 +1,22 @@
 {
   "name": "ts-ser",
   "version": "1.0.0",
-  "description": "",
+  "description": "try ts-serializable",
   "main": "src/app.ts",
   "scripts": {
-    "start": "ts-node src/app.ts",
+    "start": "ts-node --esm src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec ts-node src/app.ts"
+    "dev": "nodemon --exec ts-node --esm src/app.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
+    "@types/node": "^20.2.5",
+    "class-validator": "^0.14.0",
     "nodemon": "^2.0.22",
+    "reflect-metadata": "^0.1.13",
     "ts-node": "^10.9.1",
     "ts-serializable": "^3.0.28",
     "typescript": "^5.1.3"

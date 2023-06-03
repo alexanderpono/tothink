@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@ui-src/*": ["ui-src/*"],
+      "@api-src/*": ["api-src/*"]
+    },
+    "module": "es6",
+    "target": "es6",
+    "moduleResolution": "nodenext",
+    "experimentalDecorators": true
   },
   "include": [ "src/**/*" ],
   "exclude": [
