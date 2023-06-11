@@ -1,3 +1,6 @@
+import { UserProfilService } from "./UserProfilService";
+import { TariffService } from "./TariffService";
+
 export class UserPageController {
 
     public userProfile: any = {};
@@ -5,41 +8,32 @@ export class UserPageController {
     public tariffs: any[] = [];
     public bestTariff: any = {};
 
+    private readonly userProfilService: UserProfilService = new UserProfilService();
+    private readonly tarifService: TariffService = new TariffService();
+        
     constructor() {
         this.activate();
     }
 
-    public activate(): void {
-        this.requestUserProfile();
-        this.requestTariffs();
+    public async activate(): Promise<void> {
+        await this.requestUserProfile();
+        await this.requestTariffs();
     }
 
-    public async requestUserProfile(): Promise<void> { // получение данных
+    public async requestUserProfile(): Promise<void> {
         try {
-            const response = await fetch("http://localhost:4000/api/profile");
-            this.userProfile = await response.json();
-            this.findBestTariff();
+            this.userProfile = await this.userProfilService.getUserProfile();
+            this.bestTariff = await this.tarifService.findBestTariff(this.userProfile);            
         } catch (e) {
             console.error(e);
         }
     }
 
-    public async requestTariffs(): Promise<void> { // получение данных
+    public async requestTariffs(): Promise<void> {
         try {
-            const response = await fetch("http://localhost:4000/api/tariffs");
-            this.tariffs = await response.json();
-            this.findBestTariff();
+            this.tariffs = await this.tarifService.getTariffs();            
         } catch (e) {
             console.error(e);
         }
-    }
-
-    public findBestTariff(): void { // метод с бизнес логикой
-        if (this.userProfile && this.tariffs) {
-            this.bestTariff = this.tariffs.find((tarif: any) => {
-                return tarif.ageFrom <= this.userProfile.age && this.userProfile.age < tarif.ageTo;
-            });
-        }
-        console.log('findBestTariff() this.bestTariff=', this.bestTariff);
     }
 }
