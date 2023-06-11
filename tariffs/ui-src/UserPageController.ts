@@ -1,12 +1,13 @@
 import { UserProfileService } from "./UserProfileService";
 import { TariffService } from "./TariffService";
+import { UserProfileDto } from "./UserProfileDto";
+import { TariffDto } from "./TariffDto";
 
 export class UserPageController {
 
-    public userProfile: any = {};
-    public insuranceCases: any[] = [];
-    public tariffs: any[] = [];
-    public bestTariff: any = {};
+    public userProfile: UserProfileDto = new UserProfileDto();
+    public tariffs: TariffDto[] = [];
+    public bestTariff: TariffDto | void = void 0;
 
     private readonly userProfileService: UserProfileService = new UserProfileService();
     private readonly tarifService: TariffService = new TariffService();
