@@ -1,7 +1,10 @@
+import { TariffRepository } from "./TariffRepository";
+
 export class TariffService {
+    private readonly tarifRepository: TariffRepository = new TariffRepository();
+
     public async getTariffs(): Promise<any> {
-        const response = await fetch("http://localhost:4000/api/tariffs");
-        return await response.json();
+        return await this.tarifRepository.getTariffs();
     }
 
     public async findBestTariff(userProfile: any): Promise<any> {

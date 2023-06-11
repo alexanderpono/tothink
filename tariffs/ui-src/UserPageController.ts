@@ -1,4 +1,4 @@
-import { UserProfilService } from "./UserProfilService";
+import { UserProfileService } from "./UserProfileService";
 import { TariffService } from "./TariffService";
 
 export class UserPageController {
@@ -8,7 +8,7 @@ export class UserPageController {
     public tariffs: any[] = [];
     public bestTariff: any = {};
 
-    private readonly userProfilService: UserProfilService = new UserProfilService();
+    private readonly userProfileService: UserProfileService = new UserProfileService();
     private readonly tarifService: TariffService = new TariffService();
         
     constructor() {
@@ -22,7 +22,7 @@ export class UserPageController {
 
     public async requestUserProfile(): Promise<void> {
         try {
-            this.userProfile = await this.userProfilService.getUserProfile();
+            this.userProfile = await this.userProfileService.getUserProfile();
             this.bestTariff = await this.tarifService.findBestTariff(this.userProfile);            
         } catch (e) {
             console.error(e);
