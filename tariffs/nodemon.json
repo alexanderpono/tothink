@@ -1,0 +1,4 @@
+{
+    "verbose": true,
+    "ignore": ["**/ui-src/*.ts", "**/ui-src/*.tsx", "**/users.db"]
+  }

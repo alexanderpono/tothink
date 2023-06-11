@@ -5,7 +5,7 @@
       "@ui-src/*": ["ui-src/*"],
       "@api-src/*": ["api-src/*"]
     },
-    "module": "es6",
+    "module": "nodenext",
     "target": "es6",
     "moduleResolution": "nodenext",
     "experimentalDecorators": true,
