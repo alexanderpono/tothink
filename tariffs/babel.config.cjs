@@ -12,7 +12,8 @@ module.exports = {
         '@babel/preset-react'
     ],
     plugins: [
-        ["@babel/plugin-proposal-decorators", { "version": "2023-05" }]
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
+        ["@babel/plugin-transform-class-properties"]
     ],
     env: {
         production: {

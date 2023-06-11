@@ -19,6 +19,7 @@ export class UserPageController {
     public async activate(): Promise<void> {
         await this.requestUserProfile();
         await this.requestTariffs();
+        console.log('activate() this.bestTariff=', this.bestTariff);
     }
 
     public async requestUserProfile(): Promise<void> {

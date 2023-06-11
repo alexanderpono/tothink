@@ -25,10 +25,12 @@ app.listen(port, () => {
 });
 
 app.get('/api/profile', async (req, res) => {
+    const d = new Date();
+    d.setFullYear(2008);
     try {
         res.status(200)
             .header('Content-Type', 'application/json')
-            .send(JSON.stringify({ age: 15 }));
+            .send(JSON.stringify({ birthdate: d.toISOString() }));
     } catch (err) {
         console.log('err=', err);
         res.json({ err: 'err1' });
