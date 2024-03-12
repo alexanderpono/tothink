@@ -1,5 +1,5 @@
 {
-  "name": "simple_machine",
+  "name": "machine",
   "version": "1.0.0",
   "description": "",
   "main": "src/machine.ts",
