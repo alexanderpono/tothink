@@ -5,7 +5,8 @@
   "main": "src/machine.ts",
   "scripts": {
     "start": "ts-node --project tsconfig.json -r tsconfig-paths/register src/machine.ts",
-    "watch": "npx grunt",
+    "build-watch": "npx grunt",
+    "watch": "nodemon",
     "test": "jest --testPathPattern=/src/",
     "build-w": "tsc && copy package.json temp",
     "build-l": "tsc && cp package.json ./temp"

@@ -1,12 +1,9 @@
 import { program } from 'commander';
 import { Options } from './machine.types';
 const { description, name, version } = require('../package.json');
-import axios from 'axios';
 import fs from 'fs';
-import stream from 'stream';
-import util from 'util';
-import FormData from 'form-data';
 import path from 'path';
+import { MachineConstoller } from './MachineController';
 
 program
     .name(name)
@@ -20,13 +17,23 @@ if (Object.keys(options).length === 0) {
     program.help();
 }
 
-switch (options.command) {
-    case 'file': {
-        console.log('file');
-        break;
+function main() {
+    const file = path.join(__dirname, options.file);
+    // console.log('file=', file);
+    const scriptText = fs.readFileSync(file, { encoding: 'utf8' });
+    // console.log('scriptText=', scriptText);
+
+    const machine = new MachineConstoller();
+    const script = machine.compile(scriptText);
+    // console.log('script=', script);
+
+    const errors = machine.validateScript(script);
+    if (errors.length) {
+        console.log(errors.join('\n'));
+        return;
     }
 
-    default: {
-        console.log('CLI: unknown command', options.command);
-    }
+    machine.execScript(script);
 }
+
+main();

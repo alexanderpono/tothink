@@ -26,9 +26,10 @@ Options:
 
     describe('CLI', () => {
         test.each`
-            cli    | params | testName                        | projection | expected
-            ${run} | ${''}  | ${'prints help from no params'} | ${null}    | ${help}
-        `('$testName', async ({ cli, params, projection, expected }) => {
+            cli    | params                        | testName                        | expected
+            ${run} | ${''}                         | ${'prints help from no params'} | ${help}
+            ${run} | ${'-f cli-tests/scripts/1.s'} | ${'prints 1'}                   | ${'1'}
+        `('$testName', async ({ cli, params, expected }) => {
             const r = await cli(params);
             expect(r.trim()).toEqual(expected);
         });
