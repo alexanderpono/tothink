@@ -14,6 +14,7 @@ export class RSInOutView {
     draw = (graph: ImageBuilder) => {
         const h2 = this.h / 2;
         return graph
+            .lineColor('black')
             .fillColor('black')
 
             .hLine(this.x - 40, this.y1 + 20, 20)

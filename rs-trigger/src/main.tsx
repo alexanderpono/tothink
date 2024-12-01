@@ -3,6 +3,7 @@ import { AndNotView } from './views/AndNotView';
 import { OneToTwoView } from './views/OneToTwoView';
 import { RSInOutView } from './views/RSInOutView';
 import { TwoToOneView } from './views/TwoToOneView';
+import { defaultAndNotViewState, defaultConnectorViewState } from './views/views.types';
 
 console.log('main!');
 
@@ -21,10 +22,46 @@ let graph = ImageBuilder.create()
     .border()
     .font('bold 15px sans-serif');
 
-graph = new AndNotView(boxX, boxY, boxW, boxH).draw(graph);
-graph = new AndNotView(boxX, box2Y, boxW, boxH).draw(graph);
-graph = new OneToTwoView(boxX, boxY, boxW, boxH, box2Y).draw(graph);
-graph = new TwoToOneView(boxX, boxY, boxW, boxH, box2Y).draw(graph);
+graph = new AndNotView({
+    ...defaultAndNotViewState,
+    x: boxX,
+    y: boxY,
+    w: boxW,
+    h: boxH,
+    showInOut: true,
+    color: 'red'
+}).draw(graph);
+
+graph = new AndNotView({
+    ...defaultAndNotViewState,
+    x: boxX,
+    y: box2Y,
+    w: boxW,
+    h: boxH,
+    showInOut: true,
+    color: 'magenta'
+}).draw(graph);
+
+graph = new OneToTwoView({
+    ...defaultConnectorViewState,
+    boxX,
+    boxY,
+    boxW,
+    boxH,
+    box2Y,
+    color: 'green'
+}).draw(graph);
+
+graph = new TwoToOneView({
+    ...defaultConnectorViewState,
+    boxX,
+    boxY,
+    boxW,
+    boxH,
+    box2Y,
+    color: 'blue'
+}).draw(graph);
+
 graph = new RSInOutView(boxX, boxY, boxW, boxH, box2Y).draw(graph);
 
 graph.printActions().buildImage();

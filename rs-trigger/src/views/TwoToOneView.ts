@@ -1,19 +1,21 @@
 import { ImageBuilder } from '@src/ImageBuilder';
+import { ConnectorViewState } from './views.types';
 
 export class TwoToOneView {
-    constructor(
-        private x: number,
-        private y1: number,
-        private w: number,
-        private h: number,
-        private y2: number
-    ) {}
+    constructor(private state: ConnectorViewState) {}
 
     draw = (graph: ImageBuilder) => {
-        const h2 = this.h / 2;
+        const state = this.state;
+        const h2 = state.boxH / 2;
         return graph
-            .vLine(this.x + this.w + 20, this.y2 + h2, -h2 - 10)
-            .line(this.x + this.w + 20, this.y2 - 10, this.x - 20, this.y1 + this.h + 10)
-            .vLine(this.x - 20, this.y1 + this.h + 10, -30);
+            .lineColor(state.color)
+            .vLine(state.boxX + state.boxW + 20, state.box2Y + h2, -h2 - 10)
+            .line(
+                state.boxX + state.boxW + 20,
+                state.box2Y - 10,
+                state.boxX - 20,
+                state.boxY + state.boxH + 10
+            )
+            .vLine(state.boxX - 20, state.boxY + state.boxH + 10, -30);
     };
 }
