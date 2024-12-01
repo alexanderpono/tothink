@@ -12,8 +12,9 @@ export enum AppActions {
     APP_STATE = 'APP_STATE'
 }
 
-export interface SimState {
+export interface AppState {
     event: AppActions;
+    stepNo: number;
     rsTrigger: RSTriggerState;
     andNot1: AndNotElementState;
     andNot2: AndNotElementState;
@@ -21,8 +22,9 @@ export interface SimState {
     out2To1: ConnectorState;
 }
 
-export const defaultSimState: SimState = {
+export const defaultSimState: AppState = {
     event: AppActions.DEFAULT,
+    stepNo: 0,
     rsTrigger: defaultRSTriggerState,
     andNot1: defaultAndNotElementState,
     andNot2: defaultAndNotElementState,
@@ -30,9 +32,10 @@ export const defaultSimState: SimState = {
     out2To1: defaultConnectorState
 };
 
-export interface SetSimStateAction {
+export interface SetAppStateAction {
     type: AppActions.APP_STATE;
     payload: {
+        stepNo: number;
         rsTrigger: RSTriggerState;
         andNot1: AndNotElementState;
         andNot2: AndNotElementState;
@@ -43,28 +46,31 @@ export interface SetSimStateAction {
 
 export const app = {
     setSimState: (state: {
+        stepNo: number;
         rsTrigger: RSTriggerState;
         andNot1: AndNotElementState;
         andNot2: AndNotElementState;
         out1To2: ConnectorState;
         out2To1: ConnectorState;
-    }): SetSimStateAction => ({ type: AppActions.APP_STATE, payload: state })
+    }): SetAppStateAction => ({ type: AppActions.APP_STATE, payload: state })
 };
+
 interface Action {
     type: AppActions;
 }
 
-export function appReducer(state: SimState = defaultSimState, action: Action): SimState {
+export function appReducer(state: AppState = defaultSimState, action: Action): AppState {
     switch (action.type) {
         case AppActions.APP_STATE: {
             return {
                 ...state,
                 event: AppActions.APP_STATE,
-                rsTrigger: (action as SetSimStateAction).payload.rsTrigger,
-                andNot1: (action as SetSimStateAction).payload.andNot1,
-                andNot2: (action as SetSimStateAction).payload.andNot2,
-                out1To2: (action as SetSimStateAction).payload.out1To2,
-                out2To1: (action as SetSimStateAction).payload.out2To1
+                stepNo: (action as SetAppStateAction).payload.stepNo,
+                rsTrigger: (action as SetAppStateAction).payload.rsTrigger,
+                andNot1: (action as SetAppStateAction).payload.andNot1,
+                andNot2: (action as SetAppStateAction).payload.andNot2,
+                out1To2: (action as SetAppStateAction).payload.out1To2,
+                out2To1: (action as SetAppStateAction).payload.out2To1
             };
         }
     }

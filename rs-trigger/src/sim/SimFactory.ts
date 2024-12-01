@@ -21,11 +21,11 @@ export class SimFactory {
     };
     createSimObjects = () => {
         const stateManager = this.getStateManager();
-        const rsTrigger = new RSTrigger(stateManager);
-        const andNot1 = new AndNot1(stateManager);
-        const andNot2 = new AndNot2(stateManager);
-        const out1To2 = new Out1To2(stateManager);
-        const out2To1 = new Out2To1(stateManager);
+        const rsTrigger = new RSTrigger(stateManager, 'rsTrigger');
+        const andNot1 = new AndNot1(stateManager, 'andNot1');
+        const andNot2 = new AndNot2(stateManager, 'andNot2');
+        const out1To2 = new Out1To2(stateManager, 'out1To2');
+        const out2To1 = new Out2To1(stateManager, 'out2To1');
 
         const objects = { rsTrigger, andNot1, andNot2, out1To2, out2To1 };
 

@@ -10,18 +10,21 @@ import {
 import { app } from '@src/store/appReducer';
 
 export class StateManager {
+    private stepNo: number = 0;
     private rsTriggerState: RSTriggerState = defaultRSTriggerState;
     private andNot1State: AndNotElementState = defaultAndNotElementState;
     private andNot2State: AndNotElementState = defaultAndNotElementState;
     private out1To2State: ConnectorState = defaultConnectorState;
     private out2To1State: ConnectorState = defaultConnectorState;
 
+    getStepNo = (): number => this.stepNo;
     getRSTriggerState = (): RSTriggerState => this.rsTriggerState;
     getAndNot1State = (): AndNotElementState => this.andNot1State;
     getAndNot2State = (): AndNotElementState => this.andNot2State;
     getOut1To2State = (): ConnectorState => this.out1To2State;
     getOut2To1State = (): ConnectorState => this.out2To1State;
 
+    setStepNo = (stepNo: number) => (this.stepNo = stepNo);
     setRSTriggerState = (newState: RSTriggerState) => (this.rsTriggerState = newState);
     setAndNot1State = (newState: AndNotElementState) => (this.andNot1State = newState);
     setAndNot2State = (newState: AndNotElementState) => (this.andNot2State = newState);
@@ -90,6 +93,7 @@ export class StateManager {
 
     getAppState = () => {
         return {
+            stepNo: this.getStepNo(),
             rsTrigger: this.getRSTriggerState(),
             andNot1: this.getAndNot1State(),
             andNot2: this.getAndNot2State(),

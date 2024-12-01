@@ -37,10 +37,9 @@ export class AppController {
     ) {}
 
     go = (simActions: Action[]) => {
-        console.log('AppController() this.simObjects=', this.simObjects);
-        console.log('AppController() simActions=', simActions);
+        console.log('AppController::go() simActions=', simActions);
         this.processSimActions(simActions);
-        console.log('AppController() state=', this.stateManager.getAppState());
+        console.log('AppController::go() state=', this.stateManager.getAppState());
         this.render();
         this.stateManager.mirrorState();
     };
@@ -57,6 +56,9 @@ export class AppController {
                 return this.runSwitcher();
             case SimEvent.RECALC_OBJECTS:
                 return this.recalcObjects();
+            case SimEvent.INC_STEP:
+                return this.incStep();
+
             default:
                 console.error('processSimAction() unsupported type=', action.type);
         }
@@ -159,11 +161,16 @@ export class AppController {
 
     recalcObjects = () => {
         Object.keys(this.simObjects).forEach((key) => {
+            const stepNo = this.stateManager.getStepNo();
             const srcState = this.stateManager.getObjectState(key);
-            const newState = this.simObjects[key].recalc(srcState);
+            const newState = this.simObjects[key].recalc(srcState, stepNo);
             if (newState !== srcState) {
                 this.stateManager.setObjectState(key, newState);
             }
         });
+    };
+
+    incStep = () => {
+        this.stateManager.setStepNo(this.stateManager.getStepNo() + 1);
     };
 }
