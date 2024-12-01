@@ -1,3 +1,4 @@
+import { store } from '@src/store/store';
 import {
     AndNotElementState,
     ConnectorState,
@@ -6,6 +7,7 @@ import {
     defaultRSTriggerState,
     RSTriggerState
 } from './sim.types';
+import { sim } from '@src/store/simReducer';
 
 export class StateManager {
     private rsTriggerState: RSTriggerState = defaultRSTriggerState;
@@ -94,5 +96,9 @@ export class StateManager {
             out1To2: this.getOut1To2State(),
             out2To1: this.getOut2To1State()
         };
+    };
+
+    mirrorState = () => {
+        store.dispatch(sim.setSimState(this.getAppState()));
     };
 }

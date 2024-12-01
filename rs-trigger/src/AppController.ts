@@ -26,6 +26,7 @@ export class AppController {
         this.processSimActions(simActions);
         console.log('AppController() state=', this.stateManager.getAppState());
         this.render();
+        this.stateManager.mirrorState();
     };
 
     processSimActions = (simActions: Action[]) => {
