@@ -1,4 +1,4 @@
-import { ViewPort } from '@src/ViewPort';
+import { ViewPort } from '@src/ports/ViewPort';
 
 enum ImageEvent {
     DEFAULT = '',
@@ -250,7 +250,7 @@ export class ImageBuilder {
     };
 
     printActions = () => {
-        console.log('actions=', this.actions);
+        console.log('renderActions=', this.actions);
         return this;
     };
 
