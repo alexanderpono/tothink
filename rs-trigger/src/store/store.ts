@@ -1,8 +1,8 @@
 import { combineReducers, createStore, applyMiddleware, Store, compose } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { simReducer } from './simReducer';
+import { appReducer } from './appReducer';
 
-const rootReducer = combineReducers({ sim: simReducer });
+const rootReducer = combineReducers({ app: appReducer });
 
 export const store = createStore(rootReducer, composeWithDevTools());
 

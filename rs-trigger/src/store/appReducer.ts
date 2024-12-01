@@ -7,13 +7,13 @@ import {
     RSTriggerState
 } from '@src/sim/sim.types';
 
-export enum SimActions {
+export enum AppActions {
     DEFAULT = 'DEFAULT',
-    SET_SIM_STATE = 'SET_SIM_STATE'
+    APP_STATE = 'APP_STATE'
 }
 
 export interface SimState {
-    event: SimActions;
+    event: AppActions;
     rsTrigger: RSTriggerState;
     andNot1: AndNotElementState;
     andNot2: AndNotElementState;
@@ -22,7 +22,7 @@ export interface SimState {
 }
 
 export const defaultSimState: SimState = {
-    event: SimActions.DEFAULT,
+    event: AppActions.DEFAULT,
     rsTrigger: defaultRSTriggerState,
     andNot1: defaultAndNotElementState,
     andNot2: defaultAndNotElementState,
@@ -31,7 +31,7 @@ export const defaultSimState: SimState = {
 };
 
 export interface SetSimStateAction {
-    type: SimActions.SET_SIM_STATE;
+    type: AppActions.APP_STATE;
     payload: {
         rsTrigger: RSTriggerState;
         andNot1: AndNotElementState;
@@ -41,25 +41,25 @@ export interface SetSimStateAction {
     };
 }
 
-export const sim = {
+export const app = {
     setSimState: (state: {
         rsTrigger: RSTriggerState;
         andNot1: AndNotElementState;
         andNot2: AndNotElementState;
         out1To2: ConnectorState;
         out2To1: ConnectorState;
-    }): SetSimStateAction => ({ type: SimActions.SET_SIM_STATE, payload: state })
+    }): SetSimStateAction => ({ type: AppActions.APP_STATE, payload: state })
 };
 interface Action {
-    type: SimActions;
+    type: AppActions;
 }
 
-export function simReducer(state: SimState = defaultSimState, action: Action): SimState {
+export function appReducer(state: SimState = defaultSimState, action: Action): SimState {
     switch (action.type) {
-        case SimActions.SET_SIM_STATE: {
+        case AppActions.APP_STATE: {
             return {
                 ...state,
-                event: SimActions.SET_SIM_STATE,
+                event: AppActions.APP_STATE,
                 rsTrigger: (action as SetSimStateAction).payload.rsTrigger,
                 andNot1: (action as SetSimStateAction).payload.andNot1,
                 andNot2: (action as SetSimStateAction).payload.andNot2,

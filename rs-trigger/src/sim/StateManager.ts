@@ -7,7 +7,7 @@ import {
     defaultRSTriggerState,
     RSTriggerState
 } from './sim.types';
-import { sim } from '@src/store/simReducer';
+import { app } from '@src/store/appReducer';
 
 export class StateManager {
     private rsTriggerState: RSTriggerState = defaultRSTriggerState;
@@ -99,6 +99,29 @@ export class StateManager {
     };
 
     mirrorState = () => {
-        store.dispatch(sim.setSimState(this.getAppState()));
+        store.dispatch(app.setSimState(this.getAppState()));
+    };
+
+    getVal = (selector: string): number => {
+        const path = selector.split('.');
+        if (path.length !== 3) {
+            console.error('getVal selector is bad=', selector);
+            return null;
+        }
+        const objectId = path[0];
+        const containerName = path[1];
+        const fieldName = path[2];
+        const state = this.getObjectState(objectId);
+
+        if (typeof state[containerName] === 'undefined') {
+            console.error(`getVal() ${objectId}.${containerName} is not found`);
+            return null;
+        }
+
+        if (typeof state[containerName][fieldName] === 'undefined') {
+            console.error(`getVal() ${objectId}.${containerName}.${fieldName} is not found`);
+            return null;
+        }
+        return state[containerName][fieldName];
     };
 }
