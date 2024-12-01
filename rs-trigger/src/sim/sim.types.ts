@@ -3,7 +3,13 @@ export enum Status {
     STABLE = 'STABLE'
 }
 
-export interface RSTriggerState {
+export interface ObjectState {
+    status: Status;
+}
+export const defaultObjectState: ObjectState = {
+    status: Status.TRANSITION
+};
+export interface RSTriggerState extends ObjectState {
     in: {
         S: number;
         R: number;
@@ -27,7 +33,7 @@ export const defaultRSTriggerState: RSTriggerState = {
     status: Status.TRANSITION
 };
 
-export interface AndNotElementState {
+export interface AndNotElementState extends ObjectState {
     in: {
         A: number;
         B: number;
@@ -49,7 +55,7 @@ export const defaultAndNotElementState: AndNotElementState = {
     status: Status.TRANSITION
 };
 
-export interface ConnectorState {
+export interface ConnectorState extends ObjectState {
     in: {
         in: number;
     };

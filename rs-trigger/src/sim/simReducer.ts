@@ -1,7 +1,8 @@
 export enum SimEvent {
     DEFAULT = '',
     PUT_INTO_SLOT = 'SIM/PUT_INTO_SLOT',
-    RUN_SWITCHER = 'SIM/RUN_SWITCHER'
+    RUN_SWITCHER = 'SIM/RUN_SWITCHER',
+    RECALC_OBJECTS = 'SIM/RECALC_OBJECTS'
 }
 
 export interface Action {
@@ -22,6 +23,11 @@ export interface RunSwitcherAction {
     payload: {};
 }
 
+export interface RecalcObjectsAction {
+    type: SimEvent.RECALC_OBJECTS;
+    payload: {};
+}
+
 export const sim = {
     putIntoSlot: (source: string, target: string, value: number): PutIntoSlotAction => ({
         type: SimEvent.PUT_INTO_SLOT,
@@ -29,6 +35,10 @@ export const sim = {
     }),
     runSwitcher: (): RunSwitcherAction => ({
         type: SimEvent.RUN_SWITCHER,
+        payload: {}
+    }),
+    recalcObjects: (): RecalcObjectsAction => ({
+        type: SimEvent.RECALC_OBJECTS,
         payload: {}
     })
 };

@@ -9,7 +9,10 @@ const step1: Action[] = [
     sim.putIntoSlot('owner', 'andNot1.out.out', 0),
     sim.runSwitcher()
 ];
-const simActions: Action[] = [...step1];
+
+const step2: Action[] = [sim.recalcObjects(), sim.runSwitcher()];
+
+const simActions: Action[] = [...step1, ...step2];
 
 const app = SimFactory.create().createAppController();
 app.go(simActions);

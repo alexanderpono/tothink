@@ -55,6 +55,8 @@ export class AppController {
                 return this.putIntoSlot(action as PutIntoSlotAction);
             case SimEvent.RUN_SWITCHER:
                 return this.runSwitcher();
+            case SimEvent.RECALC_OBJECTS:
+                return this.recalcObjects();
             default:
                 console.error('processSimAction() unsupported type=', action.type);
         }
@@ -81,6 +83,8 @@ export class AppController {
     render = () => {
         const antNot1State = this.stateManager.getAndNot1State();
         const antNot2State = this.stateManager.getAndNot2State();
+        const out1To2State = this.stateManager.getOut1To2State();
+        const out2To1State = this.stateManager.getOut2To1State();
 
         let graph = ImageBuilder.create()
             .setDomTarget('UI')
@@ -124,7 +128,7 @@ export class AppController {
             boxW,
             boxH,
             box2Y,
-            color: 'green'
+            color: out1To2State.status === Status.STABLE ? 'red' : 'black'
         }).draw(graph);
 
         graph = new TwoToOneView({
@@ -134,7 +138,7 @@ export class AppController {
             boxW,
             boxH,
             box2Y,
-            color: 'blue'
+            color: out2To1State.status === Status.STABLE ? 'red' : 'black'
         }).draw(graph);
 
         graph = new RSInOutView(boxX, boxY, boxW, boxH, box2Y).draw(graph);
@@ -149,6 +153,16 @@ export class AppController {
             if (srcValue !== destValue) {
                 const [objId, containerName, fieldName] = pair.to.split('.');
                 this.stateManager.setSlotValue(objId, containerName, fieldName, srcValue);
+            }
+        });
+    };
+
+    recalcObjects = () => {
+        Object.keys(this.simObjects).forEach((key) => {
+            const srcState = this.stateManager.getObjectState(key);
+            const newState = this.simObjects[key].recalc(srcState);
+            if (newState !== srcState) {
+                this.stateManager.setObjectState(key, newState);
             }
         });
     };
