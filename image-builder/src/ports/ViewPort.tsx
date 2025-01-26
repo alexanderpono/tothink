@@ -86,6 +86,19 @@ export class ViewPort {
         return this;
     };
 
+    sprite = (
+        pic: InstanceType<typeof Image>,
+        srcX: number,
+        srcY: number,
+        destX: number,
+        destY: number,
+        w: number,
+        h: number
+    ) => {
+        this.context.drawImage(pic, srcX, srcY, w, h, destX, destY, w, h);
+        return this;
+    };
+
     static create = (domTarget: string): ViewPort => {
         return new ViewPort(domTarget);
     };

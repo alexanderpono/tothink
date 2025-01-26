@@ -14,7 +14,9 @@ enum ImageEvent {
     BOX = 'BOX',
     DRAW_CIRCLE = 'DRAW_CIRCLE',
     FONT = 'FONT',
-    TEXT = 'TEXT'
+    TEXT = 'TEXT',
+    SPRITE = 'SPRITE',
+    LOAD_IMG = 'LOAD_IMG'
 }
 
 export interface ImageAction {
@@ -99,6 +101,23 @@ interface TextAction extends ImageAction {
     text: string;
 }
 
+interface SpriteAction extends ImageAction {
+    type: ImageEvent.SPRITE;
+    picId: string;
+    srcX: number;
+    srcY: number;
+    destX: number;
+    destY: number;
+    w: number;
+    h: number;
+}
+
+interface LoadImgAction extends ImageAction {
+    type: ImageEvent.LOAD_IMG;
+    path: string;
+    picId: string;
+}
+
 export const imageAction = {
     setSize: (w: number, h: number): SetSizeAction => ({
         type: ImageEvent.SET_SIZE,
@@ -164,12 +183,47 @@ export const imageAction = {
         x,
         y,
         text
+    }),
+    loadImage: (path: string, picId: string): LoadImgAction => ({
+        type: ImageEvent.LOAD_IMG,
+        path,
+        picId
+    }),
+    sprite: (
+        picId: string,
+        srcX: number,
+        srcY: number,
+        destX: number,
+        destY: number,
+        w: number,
+        h: number
+    ): SpriteAction => ({
+        type: ImageEvent.SPRITE,
+        picId,
+        srcX,
+        srcY,
+        destX,
+        destY,
+        w,
+        h
     })
 };
 
 export class ImageBuilder {
     private actions: ImageAction[] = [];
     private domTarget: string = '';
+    private pictures: Record<string, InstanceType<typeof Image>> = {};
+
+    loadPic = (src, id: string) => {
+        return new Promise((resolve) => {
+            const pic: InstanceType<typeof Image> = new Image();
+            pic.src = src;
+            pic.onload = () => {
+                this.pictures[id] = pic;
+                resolve(true);
+            };
+        });
+    };
 
     setDomTarget = (domTarget: string) => {
         this.domTarget = domTarget;
@@ -248,12 +302,34 @@ export class ImageBuilder {
         return this;
     };
 
-    buildImage = (): ViewPort => {
+    buildImage = (): Promise<ViewPort> => {
         let viewPort = ViewPort.create(this.domTarget);
-        this.actions.forEach((action) => {
-            viewPort = this.doAction(viewPort, action);
+        const loadImages = this.actions.filter((action) => action.type === ImageEvent.LOAD_IMG);
+        const imagesToLoad = loadImages.filter((action: LoadImgAction) => {
+            return typeof this.pictures[action.picId] === 'undefined';
         });
-        return viewPort;
+        const noLoadImages = this.actions.filter((action) => action.type !== ImageEvent.LOAD_IMG);
+        if (imagesToLoad.length > 0) {
+            const loadPromises = imagesToLoad.map((action: LoadImgAction) =>
+                this.loadPic(action.path, action.picId)
+            );
+            Promise.all(loadPromises)
+                .then(() => {
+                    noLoadImages.forEach((action) => {
+                        viewPort = this.doAction(viewPort, action);
+                    });
+                    Promise.resolve(viewPort);
+                })
+                .catch((err) => {
+                    console.log('error load images', err);
+                    return Promise.resolve(viewPort);
+                });
+        } else {
+            noLoadImages.forEach((action) => {
+                viewPort = this.doAction(viewPort, action);
+            });
+            return Promise.resolve(viewPort);
+        }
     };
 
     printActions = () => {
@@ -327,6 +403,25 @@ export class ImageBuilder {
                     (action as TextAction).y,
                     (action as TextAction).text
                 );
+
+            case ImageEvent.SPRITE: {
+                const pic = this.pictures[(action as SpriteAction).picId];
+                if (pic) {
+                    return viewPort.sprite(
+                        pic,
+                        (action as SpriteAction).srcX,
+                        (action as SpriteAction).srcY,
+                        (action as SpriteAction).destX,
+                        (action as SpriteAction).destY,
+                        (action as SpriteAction).w,
+                        (action as SpriteAction).h
+                    );
+                } else {
+                    const picId = (action as SpriteAction).picId;
+                    console.error(`pic {${picId}} is not found`, action);
+                    return viewPort;
+                }
+            }
 
             default:
                 console.error('ImageBuilder.doAction(): unknown action', action.type);

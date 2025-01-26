@@ -1,24 +1,25 @@
-import { ImageAction, ImageBuilder } from './ImageBuilder';
-import { SimFactory } from './sim/SimFactory';
-import { Action, sim } from './sim/simReducer';
+import { imageAction, ImageAction, ImageBuilder } from './ImageBuilder';
+import ImgSprite from '@src/assets/sprite.png';
 
 console.log('main!');
 
-const step1: Action[] = [
-    sim.putIntoSlot('owner', 'rsTrigger.in.S', 1),
-    sim.putIntoSlot('owner', 'rsTrigger.in.R', 1),
-    sim.putIntoSlot('owner', 'andNot1.out.out', 0),
-    sim.runSwitcher(),
-    sim.incStep()
-];
+export const SPRITE_WIDTH = 40;
+export const SPRITE_HEIGHT = 40;
+export interface Sprite {
+    x: number;
+    y: number;
+}
+export const man: Sprite = {
+    x: 0,
+    y: 0
+};
 
-const step2: Action[] = [sim.recalcObjects(), sim.runSwitcher(), sim.incStep()];
-const step3: Action[] = [sim.recalcObjects(), sim.runSwitcher(), sim.incStep()];
-
-const simActions: Action[] = [...step1, ...step2, ...step3];
 const renderActions = [
+    imageAction.loadImage(ImgSprite, 'sprites'),
     { type: 'SET_SIZE', w: 800, h: 400 },
     { type: 'CREATE_CONTEXT' },
+    imageAction.sprite('sprites', 0, 0, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT),
+    imageAction.sprite('sprites', 0, 0, 320, 200, 480, 200),
     { type: 'LINE_COLOR', color: 'black' },
     { type: 'LINE_WIDTH', width: 1 },
     { type: 'BORDER' },
@@ -70,16 +71,7 @@ const renderActions = [
     { type: 'H_LINE', x0: 231, y0: 292, len: 10 }
 ];
 
-// const app = SimFactory.create().createAppController();
-// app.go(simActions);
-
 let graph = ImageBuilder.create().setDomTarget('UI');
-// .setSize(800, 400)
-// .createContext()
-// .lineColor('black')
-// .lineWidth(1)
-// .border()
-// .font('bold 15px sans-serif');
 
 graph
     .addActions(renderActions as ImageAction[])
