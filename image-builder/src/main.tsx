@@ -1,5 +1,4 @@
 import { imageAction, ImageAction, ImageBuilder } from './ImageBuilder';
-import ImgSprite from '@src/assets/sprite.png';
 
 console.log('main!');
 
@@ -15,7 +14,7 @@ export const man: Sprite = {
 };
 
 const renderActions = [
-    imageAction.loadImage(ImgSprite, 'sprites'),
+    imageAction.loadImage('sprite.png', 'sprites'),
     { type: 'SET_SIZE', w: 800, h: 400 },
     { type: 'CREATE_CONTEXT' },
     imageAction.sprite('sprites', 0, 0, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT),
