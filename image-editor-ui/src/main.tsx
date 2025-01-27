@@ -1,3 +1,4 @@
+import { AppFactory } from './AppFactory';
 import { imageAction, ImageAction, ImageBuilder } from './ImageBuilder';
 
 console.log('main!');
@@ -76,3 +77,15 @@ graph
     .addActions(renderActions as ImageAction[])
     .printActions()
     .buildImage();
+
+const app = new AppFactory();
+app.createModel();
+const document = app.createDocument();
+document.setSize(800, 400);
+const layer = app.createLayer();
+
+layer.loadImage('sprite.png');
+layer.moveTo(320, 200);
+
+// console.log('model=', app.getModel());
+console.log('doc=', app.getModel().toJSON());
