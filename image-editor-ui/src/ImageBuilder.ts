@@ -302,6 +302,19 @@ export class ImageBuilder {
         return this;
     };
 
+    drawSprite = (
+        picId: string,
+        srcX: number,
+        srcY: number,
+        destX: number,
+        destY: number,
+        w: number,
+        h: number
+    ) => {
+        this.actions.push(imageAction.sprite(picId, srcX, srcY, destX, destY, w, h));
+        return this;
+    };
+
     buildImage = (): Promise<ViewPort> => {
         let viewPort = ViewPort.create(this.domTarget);
         const loadImages = this.actions.filter((action) => action.type === ImageEvent.LOAD_IMG);

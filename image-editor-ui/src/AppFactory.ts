@@ -1,4 +1,5 @@
 import { DocumentController } from './docControllers/DocumentController';
+import { ImageResourceController } from './docControllers/ImageResourceController';
 import { LayerController } from './docControllers/LayerController';
 import { DocumentModel } from './DocumentModel';
 
@@ -24,6 +25,8 @@ export class AppFactory {
     };
 
     createLayer = () => new LayerController(this.newObjectId(), this, this.docModel);
+    createImageResource = (id: string, path: string) =>
+        new ImageResourceController(id, path, this, this.docModel);
 
     getModel = (): DocumentModel => this.docModel;
 }
