@@ -5,7 +5,7 @@ import {
     Layer
 } from './docStructures/docStructures.types';
 
-interface DocumentJSON {
+export interface DocumentJSON {
     width: number;
     height: number;
     images: ImageResource[];
