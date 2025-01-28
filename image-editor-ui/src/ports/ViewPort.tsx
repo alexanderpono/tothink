@@ -4,10 +4,14 @@ import { render } from 'react-dom';
 export class ViewPort {
     private context: CanvasRenderingContext2D = null;
     private canvas: HTMLCanvasElement = null;
+    private width: number = 0;
+    private height: number = 0;
 
     constructor(private domTarget: string) {}
 
     setSize = (w: number, h: number) => {
+        this.width = w;
+        this.height = h;
         render(
             <canvas id="canvas" height={h} width={w}></canvas>,
             document.getElementById(this.domTarget)
@@ -96,6 +100,11 @@ export class ViewPort {
         h: number
     ) => {
         this.context.drawImage(pic, srcX, srcY, w, h, destX, destY, w, h);
+        return this;
+    };
+
+    clear = () => {
+        this.context.clearRect(0, 0, this.width, this.height);
         return this;
     };
 

@@ -3,6 +3,7 @@ import { ViewPort } from '@src/ports/ViewPort';
 enum ImageEvent {
     DEFAULT = '',
     SET_SIZE = 'SET_SIZE',
+    CLEAR = 'CLEAR',
     LINE_COLOR = 'LINE_COLOR',
     CREATE_CONTEXT = 'CREATE_CONTEXT',
     FILL_COLOR = 'FILL_COLOR',
@@ -27,6 +28,10 @@ interface SetSizeAction extends ImageAction {
     type: ImageEvent.SET_SIZE;
     w: number;
     h: number;
+}
+
+interface ClearAction extends ImageAction {
+    type: ImageEvent.CLEAR;
 }
 
 interface LineColorAction extends ImageAction {
@@ -123,6 +128,9 @@ export const imageAction = {
         type: ImageEvent.SET_SIZE,
         w,
         h
+    }),
+    clear: (): ClearAction => ({
+        type: ImageEvent.CLEAR
     }),
     lineColor: (color: string): LineColorAction => ({
         type: ImageEvent.LINE_COLOR,
@@ -232,6 +240,11 @@ export class ImageBuilder {
 
     setSize = (w: number, h: number) => {
         this.actions.push(imageAction.setSize(w, h));
+        return this;
+    };
+
+    clear = () => {
+        this.actions.push(imageAction.clear());
         return this;
     };
 
@@ -354,6 +367,9 @@ export class ImageBuilder {
         switch (action.type) {
             case ImageEvent.SET_SIZE:
                 return viewPort.setSize((action as SetSizeAction).w, (action as SetSizeAction).h);
+
+            case ImageEvent.CLEAR:
+                return viewPort.clear();
 
             case ImageEvent.LINE_COLOR:
                 return viewPort.lineColor((action as LineColorAction).color);

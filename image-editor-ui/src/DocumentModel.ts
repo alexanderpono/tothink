@@ -21,6 +21,9 @@ export class DocumentModel {
     constructor() {}
 
     onCreateDocument = (document: Document) => {
+        this.images = {};
+        this.layers = {};
+        this.objects = {};
         this.document = document;
         this.objects[document.id] = document;
     };
