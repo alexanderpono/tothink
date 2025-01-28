@@ -25,6 +25,7 @@ export class DocumentController {
         const document = this.model.getDocument();
         graph.setSize(document.width, document.height);
         graph.createContext();
+        graph.clear();
 
         const loadImagesPromises = images.map((image: ImageResource) =>
             graph.loadPic(image.path, image.id)

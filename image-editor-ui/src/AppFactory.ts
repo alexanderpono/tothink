@@ -9,12 +9,19 @@ export class AppFactory {
     private maxObjectId: number = 0;
     private docModel: DocumentModel = null;
     private document: DocumentController = null;
+    private storage: AppStorage = null;
+    private layers: Record<number, LayerController> = {};
 
     newObjectId = (): number => {
         return ++this.maxObjectId;
     };
 
-    createStorage = (): AppStorage => new AppStorage();
+    createStorage = (): AppStorage => {
+        this.storage = new AppStorage();
+        return this.storage;
+    };
+
+    getStorage = () => this.storage;
 
     createDocument = (): DocumentController => {
         this.document = new DocumentController(this.newObjectId(), this, this.docModel);
@@ -28,7 +35,14 @@ export class AppFactory {
         return this.docModel;
     };
 
-    createLayer = () => new LayerController(this.newObjectId(), this, this.docModel);
+    createLayer = () => {
+        const layer = new LayerController(this.newObjectId(), this, this.docModel);
+        this.layers[layer.getId()] = layer;
+        return layer;
+    };
+
+    getLayer = (id: number) => this.layers[id];
+
     createImageResource = (id: string, path: string) =>
         new ImageResourceController(id, path, this, this.docModel);
 
