@@ -1,8 +1,11 @@
 import { AppFactory } from './AppFactory';
 import { DocumentJSON } from './DocumentModel';
 import { ImageBuilder } from './ImageBuilder';
+import { RedoCommand } from './RedoCommand';
+import { RunScriptCommand } from './RunScriptCommand';
 import { ScriptApp } from './script/ScriptApp';
 import { ScriptDoc } from './script/ScriptDoc';
+import { UndoCommand } from './UndoCommand';
 
 export enum Stragegy {
     INIT_FROM_APP = 'INIT_FROM_APP',
@@ -70,6 +73,7 @@ export class AppController {
     updateStorage = () => {
         const appStorage = this.factory.getStorage();
         const doc = this.factory.getModel().toJSON();
+        console.log('updateStorage() doc=', doc);
 
         appStorage.setDocument(doc);
     };
@@ -81,5 +85,61 @@ export class AppController {
             graph.lineColor('black').lineWidth(1).border();
             graph.printActions().buildImage();
         });
+    };
+
+    storeUndo = (actionS: string) => {
+        const appStorage = this.factory.getStorage();
+        let action = '';
+        try {
+            action = JSON.parse(actionS);
+        } catch {}
+
+        if (action === '') {
+            console.error('cannot parse', actionS);
+            return;
+        }
+
+        console.log('storeUndo() appStorage.getHistoryDoc()=', appStorage.getHistoryDoc());
+        if (!Boolean(appStorage.getHistoryDoc())) {
+            const doc = this.factory.getModel().toJSON();
+            appStorage.setHistoryDoc(JSON.stringify(doc));
+        }
+
+        if (!Boolean(appStorage.getHistory())) {
+            appStorage.setHistory(JSON.stringify([action]));
+            appStorage.setUndoneIndex('1');
+        } else {
+            let history = [];
+            const historyS = appStorage.getHistory();
+
+            try {
+                history = JSON.parse(historyS);
+            } catch {
+                console.error('error parsing history=', historyS);
+            }
+
+            const undoneIndexS = appStorage.getUndoneIndex();
+            let undoneIndex = parseInt(undoneIndexS);
+            if (isNaN(undoneIndex) || undoneIndex < 0 || undoneIndex > history.length) {
+                undoneIndex = history.length;
+            }
+
+            history = history.slice(0, undoneIndex);
+            history = [...history, action];
+            appStorage.setHistory(JSON.stringify(history));
+            appStorage.setUndoneIndex('' + history.length);
+        }
+    };
+
+    undo = () => {
+        const scriptRunner = new RunScriptCommand(this.factory);
+        const undoCommand = new UndoCommand(this.factory, scriptRunner);
+        undoCommand.do();
+    };
+
+    redo = () => {
+        const scriptRunner = new RunScriptCommand(this.factory);
+        const redoCommand = new RedoCommand(this.factory, scriptRunner);
+        redoCommand.do();
     };
 }

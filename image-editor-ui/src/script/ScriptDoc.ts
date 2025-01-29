@@ -23,4 +23,14 @@ export class ScriptDoc {
         this._factory.initFromDocument(doc);
         this._ctrl.onDocumentUpdate();
     };
+
+    undo = () => {
+        this._ctrl.undo();
+        this._ctrl.onDocumentUpdate();
+    };
+
+    redo = () => {
+        this._ctrl.redo();
+        this._ctrl.onDocumentUpdate();
+    };
 }
