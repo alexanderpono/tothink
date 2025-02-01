@@ -4,6 +4,7 @@ const DOC = 'doc';
 const HISTORY_DOC = 'historyDoc';
 const HISTORY = 'history';
 const UNDONE_INDEX = 'undoneIndex';
+const WIN = 'win';
 
 export class AppStorage {
     setDocument = (doc: DocumentJSON) => {
@@ -25,5 +26,10 @@ export class AppStorage {
     getUndoneIndex = () => localStorage.getItem(UNDONE_INDEX);
     setUndoneIndex = (index: string) => {
         localStorage.setItem(UNDONE_INDEX, index);
+    };
+
+    getWin = () => localStorage.getItem(WIN);
+    setWin = (win: string) => {
+        localStorage.setItem(WIN, win);
     };
 }

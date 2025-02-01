@@ -7,6 +7,7 @@ import {
 } from '@src/docStructures/docStructures.types';
 import { DocumentModel } from '@src/DocumentModel';
 import { ImageBuilder } from '@src/ImageBuilder';
+import { EditorWindow } from '@src/WindowController.types';
 
 export class DocumentController {
     constructor(private id: number, private factory: AppFactory, private model: DocumentModel) {
@@ -20,10 +21,10 @@ export class DocumentController {
         return this;
     };
 
-    render = (graph: ImageBuilder): Promise<ImageBuilder> => {
+    render = (graph: ImageBuilder, win: EditorWindow): Promise<ImageBuilder> => {
         const images = this.model.getImagesList();
         const document = this.model.getDocument();
-        graph.setSize(document.width, document.height);
+        graph.setSize(win.width, win.height);
         graph.createContext();
         graph.clear();
 
@@ -39,8 +40,8 @@ export class DocumentController {
                             layer.sprite.sourceId,
                             layer.sprite.x,
                             layer.sprite.y,
-                            layer.x,
-                            layer.y,
+                            layer.x - win.scrollX,
+                            layer.y - win.scrollY,
                             layer.sprite.width,
                             layer.sprite.height
                         );

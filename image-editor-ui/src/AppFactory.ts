@@ -1,9 +1,11 @@
+import { AppControllerForScript } from './AppController.types';
 import { DocumentController } from './docControllers/DocumentController';
 import { ImageResourceController } from './docControllers/ImageResourceController';
 import { LayerController } from './docControllers/LayerController';
 import { ImageResource, Layer, LayerContent } from './docStructures/docStructures.types';
 import { DocumentJSON, DocumentModel } from './DocumentModel';
 import { AppStorage } from './ports/AppStorage';
+import { WindowController } from './WindowController';
 
 export class AppFactory {
     private maxObjectId: number = 0;
@@ -11,6 +13,7 @@ export class AppFactory {
     private document: DocumentController = null;
     private storage: AppStorage = null;
     private layers: Record<number, LayerController> = {};
+    private win: WindowController = null;
 
     newObjectId = (): number => {
         return ++this.maxObjectId;
@@ -26,6 +29,11 @@ export class AppFactory {
     createDocument = (): DocumentController => {
         this.document = new DocumentController(this.newObjectId(), this, this.docModel);
         return this.document;
+    };
+
+    createWindow = (app: AppControllerForScript): WindowController => {
+        this.win = new WindowController(this, this.docModel, app);
+        return this.win;
     };
 
     getDocument = (): DocumentController => this.document;

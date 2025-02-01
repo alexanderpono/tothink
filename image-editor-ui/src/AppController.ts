@@ -1,3 +1,4 @@
+import { Stragegy } from './AppController.types';
 import { AppFactory } from './AppFactory';
 import { DocumentJSON } from './DocumentModel';
 import { ImageBuilder } from './ImageBuilder';
@@ -6,17 +7,20 @@ import { RunScriptCommand } from './RunScriptCommand';
 import { ScriptApp } from './script/ScriptApp';
 import { ScriptDoc } from './script/ScriptDoc';
 import { UndoCommand } from './UndoCommand';
+import { WindowController } from './WindowController';
 
-export enum Stragegy {
-    INIT_FROM_APP = 'INIT_FROM_APP',
-    INIT_FROM_STORAGE = 'INIT_FROM_STORAGE'
+export enum GoError {
+    DOC_GET_ERROR = 'DOC_GET_ERROR',
+    WIN_GET_ERROR = 'WIN_GET_ERROR'
 }
 
 export class AppController {
     factory: AppFactory = null;
+    win: WindowController = null;
 
     constructor() {
         this.factory = new AppFactory();
+        this.win = this.factory.createWindow(this);
     }
 
     go = (strategy: Stragegy) => {
@@ -32,6 +36,7 @@ export class AppController {
             this.factory.createLayer().setSprite('sprites', 0, 0, 480, 200).moveTo(320, 200);
 
             this.updateStorage();
+            this.win.go(strategy);
         } else {
             const docString = appStorage.getDocument();
             console.log('docString=', docString);
@@ -45,7 +50,7 @@ export class AppController {
                 }
             } else {
                 console.log('error getting document from storage');
-                return;
+                return GoError.DOC_GET_ERROR;
             }
 
             if (!this.isDocValid(doc)) {
@@ -55,6 +60,10 @@ export class AppController {
             console.log('doc=', doc);
 
             this.factory.initFromDocument(doc);
+
+            if (this.win.go(strategy) === GoError.WIN_GET_ERROR) {
+                this.win.go(Stragegy.INIT_FROM_APP);
+            }
         }
 
         this.renderImage();
@@ -70,6 +79,10 @@ export class AppController {
         this.updateStorage();
     };
 
+    onWinUpdate = () => {
+        this.renderImage();
+    };
+
     updateStorage = () => {
         const appStorage = this.factory.getStorage();
         const doc = this.factory.getModel().toJSON();
@@ -81,7 +94,7 @@ export class AppController {
     renderImage = () => {
         let graph = ImageBuilder.create().setDomTarget('UI');
         const document = this.factory.getDocument();
-        document.render(graph).then((graph) => {
+        document.render(graph, this.win.getWin()).then((graph) => {
             graph.lineColor('black').lineWidth(1).border();
             graph.printActions().buildImage();
         });
