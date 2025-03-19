@@ -1,0 +1,41 @@
+.wrap {
+    width: 100px;
+    height: 100px;
+    border: 1px solid red;
+    position: relative;
+
+    .thumbStyle {
+        border-radius: 20x !important;
+        background: #cccccc !important;
+    }
+
+    &.hover {
+        .thumbStyle {
+            background: #42abe1 !important;
+        }
+    }
+
+    .trackStyle {
+        right: 0 !important;
+        width: 5px !important;
+        border-radius: 2px !important;
+        background: #f0f0f0;
+    }
+}
+
+:global(html) {
+    --scrolbarBG: #F0;
+    --thumbBG: #42ABE1;
+}
+:global(*::-webkit-scrollbar) { width: 5px; height: 5px; }
+:global(*) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+:global(*::-webkit-scrollbar-track) {
+    background: var(--scrollbarBG);
+}
+:global(*::-webkit-scrollbar-thumb) {
+    background-color: var(--thumbBG);
+    border-radius: 5px;
+}

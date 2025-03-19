@@ -9,10 +9,67 @@
 
     <style>
     </style>
+
+    <style>
+        body {
+            padding-top: 10px;
+            height: 100vh;
+            text-align: center;
+            color: rgb(56, 55, 55);
+            font-size: 2rem;
+            text-decoration: dashed;
+        }
+
+        img {
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+        }
+
+        img:hover {
+            transform: translateY(5px);
+            box-shadow: inset 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+        }
+    </style>
 </head>
+
 
 <body>
     <div id="UI"></div>
+    <div id="UI2"></div>
+
+    <!-- <p>Скопируйте любое изображение и нажмите на странице Ctrl + V</p> -->
+    <img id="image" />
+
+    <script>
+        // обработчик события вставки привязан ко все странице
+        document.onpaste = function (pasteEvent) {
+
+            // получаем первый элемент содержимого буфера обмена
+            const item = pasteEvent.clipboardData.items[0];
+
+            // смотрим, является ли элемент изображением
+            if (item.type.indexOf("image") === 0) {
+
+                // преобразуем содержимое первого элемента буфера обмена в файл
+                const blob = item.getAsFile();
+
+                // создаем объект, считывающий файлы
+                const reader = new FileReader();
+
+                // когда файл загрузится
+                reader.onload = function (event) {
+                    // вставляем его на страницу
+                    document.getElementById("image").src = event.target.result;
+                };
+
+                // запускаем чтение двоичных данных файл как тип data URL
+                reader.readAsDataURL(blob);
+            }
+        }
+    </script>
+
 </body>
+
 
 </html>
