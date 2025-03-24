@@ -1,9 +1,12 @@
+import { Show } from './app.types';
+
 export class AppControllerBuilder {
     target: string = '';
     controlsTarget: string = '';
     showControls: boolean = false;
     maxCalcStep: number = 0;
     endCalcStep: number = 0;
+    show: Show = Show.default;
 
     setTarget = (target: string) => {
         this.target = target;
@@ -23,6 +26,10 @@ export class AppControllerBuilder {
     };
     setEndCalcStep = (endCalcStep: number) => {
         this.endCalcStep = endCalcStep;
+        return this;
+    };
+    setShow = (show: Show) => {
+        this.show = show;
         return this;
     };
 }

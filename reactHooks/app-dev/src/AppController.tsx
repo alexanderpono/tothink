@@ -76,7 +76,7 @@ export class AppController {
             console.error('target not found:', this.builder.target);
             return;
         }
-        render(<AppView />, target);
+        render(<AppView show={this.builder.show} />, target);
         return this;
     };
 }

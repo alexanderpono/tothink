@@ -1,3 +1,7 @@
+.tbl {
+    font-size: 1em;
+}
+
 :global(.inputString) {
     height: 200px;
     width: 200px;
@@ -29,6 +33,7 @@
     section {
         margin-right: 20px;
         font-family: 'Courier New', Courier, monospace;
+        border: 1px solid red;
     }
 }
 

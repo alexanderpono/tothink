@@ -74,6 +74,17 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
 
                 type: 'asset/resource'
+            },
+            {
+                test: /\.txt$/i,
+                use: [
+                    {
+                        loader: 'raw-loader',
+                        options: {
+                            esModule: false
+                        }
+                    }
+                ]
             }
         ]
     },

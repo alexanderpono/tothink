@@ -1,34 +1,29 @@
 import React from 'react';
 import styles from './AppView.scss';
+import { FuncUseState } from './FuncUseState';
+import { Show } from '@src/app.types';
+import cn from 'classnames';
+import { ShowSource } from './ShowSource';
+import FuncUseStateSrc from '!!raw-loader!./FuncUseState.tsx';
 
-interface AppViewProps {}
+interface AppViewProps {
+    show: Show;
+}
 
-export const AppView: React.FC<AppViewProps> = ({}) => {
+export const AppView: React.FC<AppViewProps> = ({ show }) => {
     return (
         <div>
-            <div className="tables">
-                <section>
-                    <p>input file</p>
-                    <pre className="inputString">{' 111 '}</pre>
-                </section>
-
-                <section>
-                    <p>limiters(l)</p>
-                    <table className="lexTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Lexem</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr key={`limiters-${1}`}>
-                                <td>{1 + 1}</td>
-                                <td>{1}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+            <div className={cn('tables', styles.tbl)}>
+                {(show & Show.funcUseState) > 0 && (
+                    <>
+                        <section>
+                            <FuncUseState />
+                        </section>
+                        <section>
+                            <ShowSource text={FuncUseStateSrc} />
+                        </section>
+                    </>
+                )}
             </div>
         </div>
     );

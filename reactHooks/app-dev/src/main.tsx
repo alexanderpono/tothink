@@ -1,3 +1,4 @@
+import { Show } from './app.types';
 import { AppController } from './AppController';
 import { AppControllerBuilder } from './AppControllerBuilder';
 import { AppFactory } from './AppFactory';
@@ -13,6 +14,7 @@ interface AppConfig {
     showControls: boolean;
     maxCalcStep: number;
     endCalcStep: number;
+    show: Show;
 }
 
 const defaultAppConfig: AppConfig = {
@@ -21,7 +23,8 @@ const defaultAppConfig: AppConfig = {
     controlsTarget: '',
     showControls: false,
     maxCalcStep: 0,
-    endCalcStep: 1000
+    endCalcStep: 1000,
+    show: Show.default
 };
 
 class AppRunner {
@@ -36,6 +39,7 @@ class AppRunner {
                 .setTarget(config.target)
                 .setControlsTarget(config.controlsTarget)
                 .setShowControls(config.showControls)
+                .setShow(config.show)
                 .setEndCalcStep(config.endCalcStep),
             stateManager
         );
@@ -57,6 +61,7 @@ if (window['demo'] === true) {
         controlsTarget: 'controls',
         showControls: true,
         maxCalcStep: 16,
-        endCalcStep: 16
+        endCalcStep: 16,
+        show: Show.funcUseState
     });
 }
