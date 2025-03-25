@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>React hooks
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/@shower/ribbon/styles/styles.css">
+    <link rel="stylesheet" href="demo-static/index.css">
+    <style>
+
+    </style>
+
+    <!-- <script defer src="./app-static/app.js"></script> -->
+</head>
+<body class="shower list">
+    <script>window.demo = true;</script>
+
+    <header class="caption">
+        <h1>React hooks
+        </h1>
+        <p>Александр Пономаренко</p></header>
+
+    <section class="slide title">
+        <img class="logo" src="demo-static/INNO-logo.svg" />
+        <h1>React hooks</h1>
+        <h3 class="noindent nologo">Александр Пономаренко</h3>
+    </section>
+
+    <script>
+        const defaultAppConfig = {
+            name: '',
+            target: '',
+            simControlsTarget: '',
+            showSimControls: false,
+            spaces: [],
+            limiters: [],
+            maxCalcStep: 0,
+            endCalcStep: 1000,
+            xCalcStep: 0,
+            inputString: '',
+            showInputFile: false,
+            showPrettyText: false,
+            showLimitersTable: false,
+            showSpacesTable: false,
+            showIdsTable: false,
+            showCanonicText: false,
+            formatIds: false,
+            formatComments: false,
+            showLineNumbers: false,
+            showStringsTable: false,
+            showText: false,
+            showProgram: false,
+            showConsole: false
+        };
+    </script>
+
+    <section class="slide contents">
+        <h3>Содержание</h3>
+        <p><strong>1.</strong> </p>
+        <p><strong>2.</strong> </p>
+        <p><strong>3.</strong> </p>
+        <p><strong>4.</strong> </p>
+    </section>
+
+
+    <section class="slide">
+        <h3>1. Лексический анализ. 1 строка</h3>
+        <div id="lex1" class="lex"></div>
+        <div id="lex1-controls" class="game controls"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                lex.run({
+                    ...defaultAppConfig,
+                    name: 'lex1',
+                    target: 'lex1',
+                    simControlsTarget: 'lex1-controls',
+                    showSimControls: true,
+                    maxCalcStep: 0,
+                    endCalcStep: 8,
+                    spaces: [' ', '\n'],
+                    limiters: [';', '='],
+                    inputString: 'let a = 1;',
+                    showInputFile: true,
+                    showPrettyText: false,
+                    showLimitersTable: true,
+                    showSpacesTable: true,
+                    showIdsTable: true,
+                    showCanonicText: true
+                });
+            });
+        </script>
+    </section>
+
+
+    <footer class="badge">
+        <a href="https://github.com/alexanderpono/">Проект на GitHub</a>
+    </footer>
+
+    <div class="progress"></div>
+
+    <script src="node_modules/@shower/core/dist/shower.js"></script>
+
+</body>
+</html>
