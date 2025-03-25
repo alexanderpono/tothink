@@ -31,7 +31,10 @@
         const Show = {
             default: 0,
             funcUseState: 1,
-            funcUseMemo: 2
+            funcUseMemo: 2,
+            funcUseMemoWrong: 4,
+            funcUseMemoOk1: 8,
+            funcUseMemoOk2: 16
         };
 
         const defaultAppConfig = {
@@ -81,6 +84,54 @@
                     name: 'useMemo',
                     target: 'useMemo',
                     show: Show.funcUseMemo
+                });
+            });
+        </script>
+    </section>
+
+    <section class="slide">
+        <h3>1. useMemo - ошибка</h3>
+        <div id="useMemoWrong" class="lex"></div>
+        <div id="useMemoWrong-controls" class="game controls"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                app.run({
+                    ...defaultAppConfig,
+                    name: 'useMemoWrong',
+                    target: 'useMemoWrong',
+                    show: Show.funcUseMemoWrong
+                });
+            });
+        </script>
+    </section>
+
+    <section class="slide">
+        <h3>1. useMemo - правильно</h3>
+        <div id="useMemoOk1" class="lex"></div>
+        <div id="useMemoOk1-controls" class="game controls"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                app.run({
+                    ...defaultAppConfig,
+                    name: 'useMemoOk1',
+                    target: 'useMemoOk1',
+                    show: Show.funcUseMemoOk1
+                });
+            });
+        </script>
+    </section>
+
+    <section class="slide">
+        <h3>1. useMemo - правильно</h3>
+        <div id="useMemoOk2" class="lex"></div>
+        <div id="useMemoOk2-controls" class="game controls"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                app.run({
+                    ...defaultAppConfig,
+                    name: 'useMemoOk2',
+                    target: 'useMemoOk2',
+                    show: Show.funcUseMemoOk2
                 });
             });
         </script>

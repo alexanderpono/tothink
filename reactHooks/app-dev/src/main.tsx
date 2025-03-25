@@ -62,7 +62,9 @@ if (window['demo'] === true) {
         showControls: true,
         maxCalcStep: 16,
         endCalcStep: 16,
-        // show: Show.funcUseMemo
-        show: Show.funcUseState
+        show: Show.funcUseMemoOk2
+        // show: Show.funcUseMemoOk1
+        // show: Show.funcUseMemoWrong
+        // show: Show.funcUseState
     });
 }
