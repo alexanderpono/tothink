@@ -18,7 +18,7 @@ export const AppView: React.FC<AppViewProps> = ({ show }) => {
             <div className={cn('tables', styles.tbl)}>
                 {(show & Show.funcUseState) > 0 && (
                     <>
-                        <section>
+                        <section className="app">
                             <FuncUseState />
                         </section>
                         <section>
@@ -28,7 +28,7 @@ export const AppView: React.FC<AppViewProps> = ({ show }) => {
                 )}
                 {(show & Show.funcUseMemo) > 0 && (
                     <>
-                        <section>
+                        <section className="app">
                             <div>
                                 <FuncDontUseMemo />
                             </div>

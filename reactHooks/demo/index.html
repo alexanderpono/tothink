@@ -11,7 +11,7 @@
 
     </style>
 
-    <!-- <script defer src="./app-static/app.js"></script> -->
+    <script defer src="./app-static/app.js"></script>
 </head>
 <body class="shower list">
     <script>window.demo = true;</script>
@@ -28,30 +28,20 @@
     </section>
 
     <script>
+        const Show = {
+            default: 0,
+            funcUseState: 1,
+            funcUseMemo: 2
+        };
+
         const defaultAppConfig = {
             name: '',
             target: '',
             simControlsTarget: '',
             showSimControls: false,
-            spaces: [],
-            limiters: [],
             maxCalcStep: 0,
             endCalcStep: 1000,
-            xCalcStep: 0,
-            inputString: '',
-            showInputFile: false,
-            showPrettyText: false,
-            showLimitersTable: false,
-            showSpacesTable: false,
-            showIdsTable: false,
-            showCanonicText: false,
-            formatIds: false,
-            formatComments: false,
-            showLineNumbers: false,
-            showStringsTable: false,
-            showText: false,
-            showProgram: false,
-            showConsole: false
+            show: Show.default
         };
     </script>
 
@@ -65,28 +55,32 @@
 
 
     <section class="slide">
-        <h3>1. Лексический анализ. 1 строка</h3>
-        <div id="lex1" class="lex"></div>
-        <div id="lex1-controls" class="game controls"></div>
+        <h3>1. useState</h3>
+        <div id="useState" class="lex"></div>
+        <div id="useState-controls" class="game controls"></div>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                lex.run({
+                app.run({
                     ...defaultAppConfig,
-                    name: 'lex1',
-                    target: 'lex1',
-                    simControlsTarget: 'lex1-controls',
-                    showSimControls: true,
-                    maxCalcStep: 0,
-                    endCalcStep: 8,
-                    spaces: [' ', '\n'],
-                    limiters: [';', '='],
-                    inputString: 'let a = 1;',
-                    showInputFile: true,
-                    showPrettyText: false,
-                    showLimitersTable: true,
-                    showSpacesTable: true,
-                    showIdsTable: true,
-                    showCanonicText: true
+                    name: 'useState',
+                    target: 'useState',
+                    show: Show.funcUseState
+                });
+            });
+        </script>
+    </section>
+
+    <section class="slide">
+        <h3>1. useMemo</h3>
+        <div id="useMemo" class="lex"></div>
+        <div id="useMemo-controls" class="game controls"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                app.run({
+                    ...defaultAppConfig,
+                    name: 'useMemo',
+                    target: 'useMemo',
+                    show: Show.funcUseMemo
                 });
             });
         </script>

@@ -506,15 +506,23 @@ strong {
 }
 
 .program {
-    height: 280px;
-    width: 230px;
+    height: 350px;
+    width: 780px;
     border: 1px solid #00aae6;
-    white-space: wrap !important;
+    /* white-space: wrap !important; */
+    font-family: 'Courier New', Courier, monospace;
+    overflow: auto;
 }
 
-.console {
-    height: 280px;
-    width: 230px;
+.keyword {
+    font-weight: bold;
+}
+
+.app {
+    height: 350px;
+    width: 250px;
     border: 1px solid #00aae6;
-    white-space: wrap;
+    white-space: wrap !important;
+    /* word-wrap: break-word; */
+    overflow: hidden;
 }
