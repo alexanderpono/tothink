@@ -42,8 +42,8 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
     new ModuleFederationPlugin({
-      name: 'widgets',
-      filename: 'widgets.js',
+      name: 'home',
+      filename: 'home.js',
       shared: {
         react: { requiredVersion: deps.react, singleton: true },
         'react-dom': { requiredVersion: deps['react-dom'], singleton: true },

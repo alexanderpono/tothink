@@ -54,7 +54,7 @@ module.exports = {
         },
       },
       remotes: {
-        widgets: `widgets@http://localhost:3002/widgets.js`,
+        home: `home@http://localhost:3002/home.js`,
       },
     }),
     new CopyPlugin({

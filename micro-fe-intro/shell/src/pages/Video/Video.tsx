@@ -10,8 +10,8 @@ import styles from './styles.module.scss';
 
 export const Video: FC = () => {
   const [microservice, setMicroservice] = useState<Microservice>({
-    url: config.microservices.widgets.url,
-    scope: 'widgets',
+    url: config.microservices.home.url,
+    scope: 'home',
     module: './Zack',
   });
 

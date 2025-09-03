@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const config = {
   microservices: {
-    widgets: {
+    home: {
       url: '',
     },
   },

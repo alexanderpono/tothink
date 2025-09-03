@@ -11,14 +11,14 @@ import { Loader } from '../components/Loader';
 import { config } from '../config';
 import { Video } from '../pages/Video';
 
-import Todo from 'widgets/Todo';
+import Todo from 'home/Todo';
 
 const queryClient = new QueryClient();
 
 export const App = () => {
   const gallery: Microservice = {
-    url: config.microservices.widgets.url,
-    scope: 'widgets',
+    url: config.microservices.home.url,
+    scope: 'home',
     module: './Gallery',
   };
 
