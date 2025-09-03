@@ -32,6 +32,21 @@ module.exports = {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            }
+          }
+        ]
+      }
     ],
   },
   plugins: [
@@ -53,16 +68,14 @@ module.exports = {
         },
       },
       exposes: {
-        './Todo': './src/App',
-        './Gallery': './src/pages/Gallery/Gallery',
-        './Zack': './src/pages/Zack/Zack',
-        './Jack': './src/pages/Jack/Jack',
+        './Header': './src/Header.tsx',
+        './Footer': './src/Footer.tsx'
       },
     }),
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     hot: true,
-    port: 3002,
+    port: 3000,
   },
 };

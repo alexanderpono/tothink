@@ -1,11 +1,11 @@
-declare module 'home/Todo' {
-  const Todo: React.ComponentType;
+declare module 'home/Header' {
+  const Header: React.ComponentType;
 
-  export default Todo;
+  export default Header;
 }
 
-declare module 'home/Gallery' {
-  const Gallery: React.ComponentType;
+declare module 'home/Footer' {
+  const Footer: React.ComponentType;
 
-  export default Gallery;
+  export default Footer;
 }

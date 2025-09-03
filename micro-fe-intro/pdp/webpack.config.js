@@ -33,6 +33,21 @@ module.exports = {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            }
+          }
+        ]
+      }
     ],
   },
   plugins: [
@@ -54,7 +69,7 @@ module.exports = {
         },
       },
       remotes: {
-        home: `home@http://localhost:3002/home.js`,
+        home: `home@http://localhost:3000/home.js`,
       },
     }),
     new CopyPlugin({
