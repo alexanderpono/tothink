@@ -43,8 +43,8 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
     new ModuleFederationPlugin({
-      name: 'shell',
-      filename: 'shell.js',
+      name: 'pdp',
+      filename: 'pdp.js',
       shared: {
         react: { requiredVersion: deps.react, singleton: true },
         'react-dom': { requiredVersion: deps['react-dom'], singleton: true },
